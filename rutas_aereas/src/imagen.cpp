@@ -3,6 +3,47 @@
 #include <assert.h>
 #include <iostream>
 
+void Imagen::Borrar() {
+  if (data != nullptr || (nc != 0 && nf != 0)) {
+    for (int i = 0; i < nf; i++) {
+      delete[] data[i];
+    }
+    delete[] data;
+  }
+  nf = nc = 0;
+  data = nullptr;
+}
+
+void Imagen::Copiar(const Imagen &I) {
+  Borrar();
+  nf = I.nf;
+  nc = I.nc;
+  data = new Pixel *[nf];
+  for (int i = 0; i < nf; i++) {
+    data[i] = new Pixel[nc];
+    for (int j = 0; j < nc; j++) {
+      data[i][j].r = I.data[i][j].r;
+      data[i][j].g = I.data[i][j].g;
+      data[i][j].b = I.data[i][j].b;
+      data[i][j].transp = I.data[i][j].transp;
+    }
+  }
+}
+
+Imagen::Imagen() {
+  nf = nc = 0;
+  data = nullptr;
+}
+
+Imagen::Imagen(const Imagen &I) { Copiar(I); }
+
+Imagen::~Imagen() { Borrar(); }
+
+Imagen &Imagen::operator=(const Imagen &I) {
+  Copiar(I);
+  return *this;
+}
+
 Imagen::Imagen(int f, int c) {
   nf = f;
   nc = c;
@@ -19,6 +60,11 @@ Imagen::Imagen(int f, int c) {
 }
 
 /**********************************************/
+Pixel &Imagen::operator()(int i, int j) {
+  assert(i >= 0 && i < nf && j >= 0 && j < nc);
+  return data[i][j];
+}
+
 const Pixel &Imagen::operator()(int i, int j) const {
   assert(i >= 0 && i < nf && j >= 0 && j < nc);
   return data[i][j];
