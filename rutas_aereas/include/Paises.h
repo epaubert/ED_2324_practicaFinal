@@ -18,7 +18,7 @@ public:
 
   class const_iterator;
 
-  class iterator {
+  class iterator {  
   private:
     set<Pais>::iterator p;
 
