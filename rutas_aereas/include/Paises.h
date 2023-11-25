@@ -25,7 +25,7 @@ public:
   public:
     friend class Paises;
     friend class const_iterator;
-    iterator();
+    /* iterator(); */
     /* iterator(set<Paises>::iterator it); */
     /* iterator(Paises::iterator &it); */
 
@@ -41,7 +41,7 @@ public:
 
   public:
     friend class Paises;
-    const_iterator();
+    /* const_iterator(); */
     /* const_iterator(set<Paises>::iterator it); */
     /* const_iterator(Paises::const_iterator &it); */
 
@@ -59,8 +59,8 @@ public:
   iterator find(const Pais &p);
   iterator find(const Punto &p);
 
-  friend class iterator;
-  friend class const_iterator;
+  /* friend class iterator; */
+  /* friend class const_iterator; */
 
   friend istream &operator>>(istream &is, Paises &R);
   friend ostream &operator<<(ostream &os, const Paises &R);
