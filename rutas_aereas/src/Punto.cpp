@@ -29,4 +29,4 @@ string Punto::getNombre() const { return nom; }
 
 void Punto::setLatitud(double l) { lat = l; }
 void Punto::setLongitud(double l) { lng = l; }
-void Punto::setNombre(double n) { nom = n; }
+void Punto::setNombre(string n) { nom = n; }
