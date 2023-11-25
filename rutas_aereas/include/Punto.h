@@ -28,6 +28,7 @@ public:
   void setLatitud(double l);
   void setLongitud(double l);
   void setNombre(double n);
+
 };
 
 #endif
