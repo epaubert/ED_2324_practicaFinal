@@ -26,12 +26,13 @@ public:
     friend class Paises;
     friend class const_iterator;
     iterator();
-    iterator(Paises &P);
-    iterator(Paises::iterator &it);
-    iterator begin();
-    iterator end();
-    iterator find(const Pais &p);
-    iterator find(const Punto &p);
+    /* iterator(set<Paises>::iterator it); */
+    /* iterator(Paises::iterator &it); */
+
+    const Pais &operator*();
+    iterator operator++();
+    bool operator==(const iterator &it) const;
+    bool operator!=(const iterator &it) const;
   };
 
   class const_iterator {
@@ -40,27 +41,29 @@ public:
 
   public:
     friend class Paises;
-    friend class iterator;
     const_iterator();
-    const_iterator(Paises &P);
-    const_iterator(Paises::const_iterator &it);
-    const_iterator begin() const;
-    const_iterator end() const;
-    const_iterator find(const Pais &p);
-    const_iterator find(const Punto &p);
+    /* const_iterator(set<Paises>::iterator it); */
+    /* const_iterator(Paises::const_iterator &it); */
+
+    const Pais &operator*() const;
+    const_iterator operator++();
+    bool operator==(const const_iterator &it) const;
+    bool operator!=(const const_iterator &it) const;
   };
 
   // TODO:
-  iterator operator*();
-  const_iterator operator*() const;
-  iterator operator++();
-  const_iterator operator++() const;
-
-  friend istream &operator>>(istream &is, Paises &R);
-  friend ostream &operator<<(ostream &os, const Paises &R);
+  iterator begin();
+  const_iterator begin() const;
+  iterator end();
+  const_iterator end() const;
+  iterator find(const Pais &p);
+  iterator find(const Punto &p);
 
   friend class iterator;
   friend class const_iterator;
+
+  friend istream &operator>>(istream &is, Paises &R);
+  friend ostream &operator<<(ostream &os, const Paises &R);
 };
 
 #endif
