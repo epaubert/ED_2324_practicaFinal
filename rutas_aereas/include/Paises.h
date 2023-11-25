@@ -11,20 +11,27 @@ private:
   set<Pais> datos;
 
 public:
-  Paises() {}
-  Paises(const Paises &P) { datos = P.datos; }
-  void Insertar(const Pais &P) { datos.insert(P); }
-  void Borrar(const Pais &P) { datos.erase(P); }
+  Paises();
+  Paises(const Paises &P);
+  void Insertar(const Pais &P);
+  void Borrar(const Pais &P);
 
   class const_iterator;
 
-  class iterator {  
+  class iterator {
   private:
     set<Pais>::iterator p;
 
   public:
     friend class Paises;
     friend class const_iterator;
+    iterator();
+    iterator(Paises &P);
+    iterator(Paises::iterator &it);
+    iterator begin();
+    iterator end();
+    iterator find(const Pais &p);
+    iterator find(const Punto &p);
   };
 
   class const_iterator {
@@ -33,80 +40,27 @@ public:
 
   public:
     friend class Paises;
+    friend class iterator;
+    const_iterator();
+    const_iterator(Paises &P);
+    const_iterator(Paises::const_iterator &it);
+    const_iterator begin() const;
+    const_iterator end() const;
+    const_iterator find(const Pais &p);
+    const_iterator find(const Punto &p);
   };
-
-  iterator begin() {
-    iterator it;
-    it.p = datos.begin();
-    return it;
-  }
-
-  const_iterator begin() const {
-    const_iterator it;
-    it.p = datos.cbegin();
-    return it;
-  }
-
-  iterator end() {
-    iterator it;
-    it.p = datos.end();
-    return it;
-  }
-
-  const_iterator end() const {
-    const_iterator it;
-    it.p = datos.cend();
-    return it;
-  }
-
-  iterator find(const Pais &p) {
-    iterator it;
-    set<Pais>::iterator i;
-    for (i = datos.begin(); i != datos.end() && !((*i) == p); ++i)
-      ;
-    it.p = i;
-    return it;
-  }
-
-  iterator find(const Punto &p) {
-    iterator it;
-    set<Pais>::iterator i;
-    for (i = datos.begin(); i != datos.end() && !((*i) == p); ++i)
-      ;
-    it.p = i;
-    return it;
-  }
 
   // TODO:
   iterator operator*();
-  const_iterator operator*();
+  const_iterator operator*() const;
   iterator operator++();
-  const_iterator operator++();
+  const_iterator operator++() const;
 
-  friend istream &operator>>(istream &is, Paises &R) {
-    Paises rlocal;
-    // leemos el comentario
-    if (is.peek() == '#') {
-      string a;
-      getline(is, a);
-    }
+  friend istream &operator>>(istream &is, Paises &R);
+  friend ostream &operator<<(ostream &os, const Paises &R);
 
-    Pais P;
-    while (is >> P) {
-      rlocal.Insertar(P);
-    }
-    R = rlocal;
-    return is;
-  }
-
-  friend ostream &operator<<(ostream &os, const Paises &R) {
-
-    Paises::const_iterator it;
-    for (it = R.begin(); it != R.end(); ++it) {
-      os << *it << "\t";
-    }
-    return os;
-  }
+  friend class iterator;
+  friend class const_iterator;
 };
 
 #endif
