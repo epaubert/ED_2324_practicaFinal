@@ -10,44 +10,30 @@ private:
   string bandera;
 
 public:
-  Pais() {}
-  Punto GetPunto() const { return p; }
-  string GetPais() const { return pais; }
-  string GetBandera() const { return bandera; }
+  Pais() ;
+  Pais(const Pais &P) ;
 
-  bool operator<(const Pais &P) const {
-    if (p.getLatitud() != P.GetPunto().getLatitud()) {
-      return p.getLatitud() < P.GetPunto().getLatitud();
-    } else
-      return p.getLongitud() < P.GetPunto().getLongitud();
-  }
+  Punto GetPunto() const ;
+  string GetPais() const ;
+  string GetBandera() const ;
 
-  bool operator==(const Pais &P) const {
-    return p.getLatitud() == P.GetPunto().getLatitud() &&
-           p.getLongitud() == P.GetPunto().getLongitud();
-  }
+  void SetPunto(Punto P);
+  void SetPais(string P) ;
+  void SetBandera(string B) ;
 
-  bool operator!=(const Pais &P) const { return !(*this == P); }
+  bool operator<(const Pais &P) const ;
 
-  bool operator==(const Punto &P) const {
-    return p.getLatitud() == P.getLatitud() &&
-           p.getLongitud() == P.getLongitud();
-  }
+  bool operator==(const Pais &P) const ;
 
-  bool operator!=(const Punto &P) const { return !(*this == P); }
+  bool operator!=(const Pais &P) const ;
 
-  friend istream &operator>>(istream &is, Pais &P) {
-    double lat, lng;
+  bool operator==(const Punto &P) const ;
 
-    is >> lat >> lng >> P.pais >> P.bandera;
+  bool operator!=(const Punto &P) const ;
 
-    P.p = Punto(lat, lng, "");
-    return is;
-  }
-  friend ostream &operator<<(ostream &os, const Pais &P) {
-    os << P.p << " " << P.pais << " " << P.bandera << endl;
-    return os;
-  }
+  friend istream &operator>>(istream &is, const Pais &P) ;  
+
+  friend ostream &operator<<(ostream &os, const Pais &P) ;
 };
 
 #endif
