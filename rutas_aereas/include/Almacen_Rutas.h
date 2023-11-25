@@ -1,6 +1,10 @@
 #include "../include/Ruta.h"
 #include <iostream>
+#include <map>
 #include <string>
+
+#ifndef _ALMACEN_RUTAS_H_
+#define _ALMACEN_RUTAS_H_
 
 class Almacen_Rutas {
 private:
@@ -41,3 +45,5 @@ public:
   friend std::istream &operator>>(std::istream &is, Almacen_Rutas &R);
   friend std::ostream &operator<<(std::ostream &os, const Almacen_Rutas &R);
 };
+
+#endif
