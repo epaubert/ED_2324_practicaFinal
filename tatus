@@ -1,0 +1,47 @@
+[33mcommit 3e2793090eb3a258a36e037742ec1ee1a31988c4[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Pedro Pelegrina Camarero <pedro.pelegrinacamarero@novatec-gmbh.de>
+Date:   Sat Nov 25 18:22:23 2023 +0100
+
+    Pais.cpp completado
+
+[33mcommit 675b84cf105c66d9dfba0d339bf2fbf3b0e61d37[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Enrique Paubert Reca <epaubert97@gmail.com>
+Date:   Sat Nov 25 17:47:05 2023 +0100
+
+    Punto.cpp creado y completado
+
+[33mcommit a18c52881fa15ba231c98503d4781b7afc0f2365[m
+Author: Pedro Pelegrina Camarero <pedro.pelegrinacamarero@novatec-gmbh.de>
+Date:   Mon Nov 20 19:27:36 2023 +0100
+
+    Ruta aerea empezada, hay que mostrar las rutas
+
+[33mcommit c6f32dcf48f350b09d6370dc2f470ebdaded0f99[m
+Author: Enrique Paubert Reca <epaubert97@gmail.com>
+Date:   Sun Nov 19 19:28:12 2023 +0100
+
+    ./pruebapegado funciona correctamente al parecer
+
+[33mcommit ea5e5aff54205f97dd6f6c3ffc0a66cd712b6e01[m
+Author: Enrique Paubert Reca <epaubert97@gmail.com>
+Date:   Sat Nov 4 21:34:22 2023 +0100
+
+    pruebarotacion completado
+
+[33mcommit 4d3197882d0bb8640b3bbdee048208d6820a7f0c[m
+Author: Enrique Paubert Reca <epaubert97@gmail.com>
+Date:   Tue Oct 31 18:29:09 2023 +0100
+
+    Algunas cosas del fichero aux creadas
+
+[33mcommit fc322e0588a11ee32963e31ba1a27fc374e1347a[m
+Author: Enrique Paubert Reca <epaubert97@gmail.com>
+Date:   Tue Oct 31 16:55:32 2023 +0100
+
+    Commit inicial
+
+[33mcommit 728d914f48aad1d8eddbb650a6268d87c8a4dc3a[m
+Author: Enrique Paubert <epaubert97@gmail.com>
+Date:   Tue Oct 31 16:52:42 2023 +0100
+
+    Initial commit

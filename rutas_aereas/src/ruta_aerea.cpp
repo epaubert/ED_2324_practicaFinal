@@ -3,16 +3,28 @@
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include<list>
 using namespace std;
 
 void mostrar_rutas(ifstream &archivo) {
-  string line;
+  string line, aux = "";
+  list<string> lista_rutas;
+  bool leyendo;
   while (getline(archivo, line)) {
-    if (line[0] == 'R') {
-      // Hacer poda de strings
-      cout << line << endl;
+    
+    if (line[0] != '#') {
+      if(line[0] == 'R'){
+        cout << aux << endl;
+        aux = "";
+      }
+      for(int i = 0; i < line.length(); i++){
+        if(!isspace(line[i])){
+          aux += line[i];
+        }
+      }
     }
   }
+  cout << aux << endl;
 }
 
 int main(int argc, char *argv[]) {
