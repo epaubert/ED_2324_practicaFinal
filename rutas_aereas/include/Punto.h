@@ -19,6 +19,7 @@ public:
 
   bool operator==(const Punto &p) const;
 
+  friend istream &operator>>(istream &is, Punto &p);
   friend ostream &operator<<(ostream &os, const Punto &p);
 
   double getLatitud() const;
@@ -29,5 +30,7 @@ public:
   void setLongitud(double l);
   void setNombre(string n);
 };
+
+#include "../src/Punto.cpp"
 
 #endif

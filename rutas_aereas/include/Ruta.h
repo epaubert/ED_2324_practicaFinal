@@ -24,27 +24,29 @@ public:
   bool operator==(const Ruta &R) const;
   bool operator<(const Ruta &R) const;
 
-    class iterator{
-        private:
-            list<Punto>:: iterator p;
-        public:
-        friend class Ruta;
-            Punto &operator*();
-            iterator operator++();
-            bool operator==(const iterator &it) const;
-            bool operator!=(const iterator &it) const;
-    } ;
+  class iterator {
+  private:
+    list<Punto>::iterator p;
 
-    class const_iterator{
-        private:
-            list<Punto>::const_iterator p;
-        public:
-        friend class Ruta;
-            const Punto &operator*() const;
-            const_iterator operator++();
-            bool operator==(const iterator &it) const;
-            bool operator!=(const iterator &it) const;
-    };
+  public:
+    friend class Ruta;
+    Punto &operator*();
+    iterator operator++();
+    bool operator==(const iterator &it) const;
+    bool operator!=(const iterator &it) const;
+  };
+
+  class const_iterator {
+  private:
+    list<Punto>::const_iterator p;
+
+  public:
+    friend class Ruta;
+    const Punto &operator*() const;
+    const_iterator operator++();
+    bool operator==(const iterator &it) const;
+    bool operator!=(const iterator &it) const;
+  };
 
   iterator begin();
   const_iterator begin() const;
@@ -57,5 +59,7 @@ public:
   friend istream &operator>>(istream &is, Ruta &R);
   friend ostream &operator<<(ostream &os, const Ruta &R);
 };
+
+#include "../src/Ruta.cpp"
 
 #endif

@@ -1,9 +1,10 @@
+#include "../include/Almacen_Rutas.h"
 #include "../include/imagen.h"
 #include <cmath>
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
-#include<list>
+#include <list>
 using namespace std;
 
 void mostrar_rutas(ifstream &archivo) {
@@ -11,14 +12,14 @@ void mostrar_rutas(ifstream &archivo) {
   list<string> lista_rutas;
   bool leyendo;
   while (getline(archivo, line)) {
-    
+
     if (line[0] != '#') {
-      if(line[0] == 'R'){
+      if (line[0] == 'R') {
         cout << aux << endl;
         aux = "";
       }
-      for(int i = 0; i < line.length(); i++){
-        if(!isspace(line[i])){
+      for (int i = 0; i < line.length(); i++) {
+        if (!isspace(line[i])) {
           aux += line[i];
         }
       }
@@ -45,7 +46,11 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
-  mostrar_rutas(rutasDisponibles);
+  Almacen_Rutas a;
+  cout << "leyendo" << endl;
+  rutasDisponibles >> a;
+  cout << "escribiendo" << endl;
+  cout << a;
 
   rutasDisponibles.close();
 

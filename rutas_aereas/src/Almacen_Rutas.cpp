@@ -65,15 +65,21 @@ bool Almacen_Rutas::const_iterator::operator!=(const const_iterator &it) const {
 }
 
 std::istream &operator>>(std::istream &is, Almacen_Rutas &R) {
+  cerr << "Almacen 1\n";
   Ruta r;
-  while (!is.eof()) {
+  while (is.peek() != EOF) {
+    cerr << "Almacen 2\n";
     if (is.peek() == '#') {
+      cerr << "Almacen 3\n";
       is.ignore(8, '\n');
     } else {
+      cerr << "Almacen 4\n";
       is >> r;
       R.Insertar(r);
     }
+    cerr << "Almacen 5\n";
   }
+  cerr << "Almacen 6\n";
   return is;
 }
 

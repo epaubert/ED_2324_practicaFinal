@@ -48,4 +48,5 @@ public:
   friend std::ostream &operator<<(std::ostream &os, const Almacen_Rutas &R);
 };
 
+#include "../src/Almacen_Rutas.cpp"
 #endif
