@@ -20,6 +20,7 @@ public:
     map<std::string, Ruta>::iterator p;
 
   public:
+    friend class Almacen_Rutas;
     Ruta &operator*();
     iterator operator++();
     bool operator==(const iterator &it) const;
@@ -31,6 +32,7 @@ public:
     map<std::string, Ruta>::const_iterator p;
 
   public:
+    friend class Almacen_Rutas;
     const Ruta &operator*() const;
     const_iterator operator++();
     bool operator==(const const_iterator &it) const;

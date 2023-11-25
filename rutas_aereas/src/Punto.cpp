@@ -19,7 +19,7 @@ bool Punto::operator==(const Punto &p) const {
 }
 
 ostream &operator<<(ostream &os, const Punto &p) {
-  os << p.lat << " " << p.lng << " " << p.nom << endl;
+  os << "(" << p.lat << ", " << p.lng << ")" << endl;
   return os;
 }
 

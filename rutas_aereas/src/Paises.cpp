@@ -15,19 +15,19 @@ Paises::iterator Paises::begin() {
 
 Paises::const_iterator Paises::begin() const {
   Paises::const_iterator it;
-  it.p = datos.begin();
+  it.p = datos.cbegin();
   return it;
 }
 
 Paises::iterator Paises::end() {
   Paises::iterator it;
-  it.p = datos.begin();
+  it.p = datos.end();
   return it;
 }
 
 Paises::const_iterator Paises::end() const {
   Paises::const_iterator it;
-  it.p = datos.end();
+  it.p = datos.cend();
   return it;
 }
 
