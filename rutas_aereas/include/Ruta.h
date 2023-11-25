@@ -3,7 +3,7 @@
 
 #include<iostream>
 #include<string>
-#include<Punto.h>
+#include<../include/Punto.h>
 #include<list>
 
 using namespace std;
@@ -29,12 +29,20 @@ class Ruta{
             private:
                 list<Punto>:: iterator p;
             public:
+                Punto &operator*();
+                iterator operator++();
+                bool operator==(const iterator &it) const;
+                bool operator!=(const iterator &it) const;
         } ;
 
         class const_iterator{
             private:
                 list<Punto>::const_iterator p;
             public:
+                const Punto &operator*() const;
+                const_iterator operator++();
+                bool operator==(const iterator &it) const;
+                bool operator!=(const iterator &it) const;
         };
 
         iterator begin() ;
