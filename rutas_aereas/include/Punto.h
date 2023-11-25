@@ -13,32 +13,21 @@ private:
 
 public:
   Punto();
-  Punto(float _lat, float _lng, string s = "") {
-    lat = _lat;
-    lng = _lng;
-    nom = s;
-  };
-  Punto(const Punto &p) {
-    lat = p.lat;
-    lng = p.lng;
-    nom = p.nom;
-  }
+  Punto(float _lat, float _lng, string s = "");
+  Punto(const Punto &p);
   ~Punto();
 
-  bool operator==(const Punto &p) const { return lat == p.lat && lng == p.lng; }
+  bool operator==(const Punto &p) const;
 
-  friend ostream &operator<<(ostream &os, const Punto &p) {
-    os << p.lat << " " << p.lng << " " << p.nom << endl;
-    return os;
-  }
+  friend ostream &operator<<(ostream &os, const Punto &p);
 
-  double getLatitud() const { return lat; }
-  double getLongitud() const { return lng; }
-  string getNombre() const { return nom; }
+  double getLatitud() const;
+  double getLongitud() const;
+  string getNombre() const;
 
-  void setLatitud(double l) { lat = l; }
-  void setLongitud(double l) { lng = l; }
-  void setNombre(double n) { nom = n; }
+  void setLatitud(double l);
+  void setLongitud(double l);
+  void setNombre(double n);
 };
 
 #endif
