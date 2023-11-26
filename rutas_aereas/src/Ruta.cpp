@@ -47,10 +47,15 @@ Ruta::iterator Ruta::find(const Punto &P) {
 }
 
 istream &operator>>(istream &is, Ruta &R) {
-  cerr << "Ruta \n";
   string s;
   int size;
   Punto p;
+
+  while (is.peek() != 'R') {
+    is.get();
+  }
+
+  cerr << "Ruta encontrada" << endl;
 
   is >> s;
   R.setCode(s);
@@ -61,12 +66,14 @@ istream &operator>>(istream &is, Ruta &R) {
     R.Insertar(p);
   }
 
+  /* cerr << "Ruta: "; */
+  /* cerr << R << endl; */
   return is;
 }
 
 ostream &operator<<(ostream &os, const Ruta &R) {
   os << R.getCode() << "\t" << R.puntos.size() << "\t";
-  for (const auto punto : R.puntos) {
+  for (auto it = R.begin(); it != R.end(); ++it) {
     os << punto << " ";
   }
 }

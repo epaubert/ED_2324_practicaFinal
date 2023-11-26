@@ -40,9 +40,9 @@ public:
   };
 
   iterator begin();
-  const_iterator begin() const;
+  const_iterator cbegin() const;
   iterator end();
-  const_iterator end() const;
+  const_iterator cend() const;
 
   friend std::istream &operator>>(std::istream &is, Almacen_Rutas &R);
   friend std::ostream &operator<<(std::ostream &os, const Almacen_Rutas &R);

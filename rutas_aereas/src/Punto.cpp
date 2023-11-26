@@ -1,4 +1,5 @@
 #include "../include/Punto.h"
+#include <assert.h>
 
 Punto::Punto() {}
 Punto::Punto(float _lat, float _lng, string s) {
@@ -19,15 +20,32 @@ bool Punto::operator==(const Punto &p) const {
 }
 
 istream &operator>>(istream &is, Punto &p) {
-  cerr << "Punto\n";
-  double d;
+  /* cerr << "\nPunto: "; */
+  double d[2];
+  int i = 0;
+
+  while (is.peek() != ')') {
+    switch (is.peek()) {
+    case '(':
+    case ',':
+    case ' ':
+    case '\t':
+    case '\n':
+    case '\r':
+      is.get();
+      break;
+    default:
+      assert(i <= 2);
+      is >> d[i];
+      i++;
+      break;
+    }
+  }
   is.get();
-  is >> d;
-  p.setLatitud(d);
-  is.get();
-  is >> d;
-  p.setLongitud(d);
-  is.get();
+
+  p.setLatitud(d[0]);
+  p.setLongitud(d[1]);
+  /* cerr << p; */
   return is;
 }
 
