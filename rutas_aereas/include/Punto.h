@@ -18,6 +18,7 @@ public:
   ~Punto();
 
   bool operator==(const Punto &p) const;
+  bool operator!=(const Punto &p) const;
 
   friend istream &operator>>(istream &is, Punto &p);
   friend ostream &operator<<(ostream &os, const Punto &p);

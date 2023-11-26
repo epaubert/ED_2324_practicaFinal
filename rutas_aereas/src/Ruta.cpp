@@ -19,7 +19,7 @@ Ruta::iterator Ruta::begin() {
   return it;
 }
 
-Ruta::const_iterator Ruta::begin() const {
+Ruta::const_iterator Ruta::cbegin() const {
   Ruta::const_iterator it;
   it.p = puntos.cbegin();
   return it;
@@ -31,7 +31,7 @@ Ruta::iterator Ruta::end() {
   return it;
 }
 
-Ruta::const_iterator Ruta::end() const {
+Ruta::const_iterator Ruta::cend() const {
   Ruta::const_iterator it;
   it.p = puntos.cend();
   return it;
@@ -45,6 +45,39 @@ Ruta::iterator Ruta::find(const Punto &P) {
   it.p = i;
   return it;
 }
+
+Punto &Ruta::iterator::operator*() { return *p; }
+
+Ruta::iterator Ruta::iterator::operator++() {
+  ++p;
+  return *this;
+}
+
+bool Ruta::iterator::operator==(const iterator &it) const {
+  return *p == *it.p;
+}
+
+bool Ruta::iterator::operator!=(const iterator &it) const {
+  return *p != *it.p;
+}
+
+const Punto &Ruta::const_iterator::operator*() const {
+  return *p;
+}
+
+Ruta::const_iterator Ruta::const_iterator::operator++() {
+  ++p;
+  return *this;
+}
+
+bool Ruta::const_iterator::operator==(const const_iterator &it) const {
+  return p == it.p;
+}
+
+bool Ruta::const_iterator::operator!=(const const_iterator &it) const {
+  return p != it.p;
+}
+
 
 istream &operator>>(istream &is, Ruta &R) {
   string s;
@@ -73,7 +106,7 @@ istream &operator>>(istream &is, Ruta &R) {
 
 ostream &operator<<(ostream &os, const Ruta &R) {
   os << R.getCode() << "\t" << R.puntos.size() << "\t";
-  for (auto it = R.begin(); it != R.end(); ++it) {
-    os << punto << " ";
+  for (auto it = R.cbegin(); it != R.cend(); ++it) {
+    os << *it << " ";
   }
 }

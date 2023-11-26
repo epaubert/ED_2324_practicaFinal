@@ -44,15 +44,15 @@ public:
     friend class Ruta;
     const Punto &operator*() const;
     const_iterator operator++();
-    bool operator==(const iterator &it) const;
-    bool operator!=(const iterator &it) const;
+    bool operator==(const const_iterator &it) const;
+    bool operator!=(const const_iterator &it) const;
   };
 
   iterator begin();
-  const_iterator begin() const;
+  const_iterator cbegin() const;
 
   iterator end();
-  const_iterator end() const;
+  const_iterator cend() const;
 
   iterator find(const Punto &P);
 

@@ -19,6 +19,10 @@ bool Punto::operator==(const Punto &p) const {
   return lat == p.lat && lng == p.lng;
 }
 
+bool Punto::operator!=(const Punto &p) const {
+  return lat != p.lat && lng != p.lng;
+}
+
 istream &operator>>(istream &is, Punto &p) {
   /* cerr << "\nPunto: "; */
   double d[2];
