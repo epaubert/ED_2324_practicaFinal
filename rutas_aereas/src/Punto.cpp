@@ -24,7 +24,6 @@ bool Punto::operator!=(const Punto &p) const {
 }
 
 istream &operator>>(istream &is, Punto &p) {
-  /* cerr << "\nPunto: "; */
   double d[2];
   int i = 0;
 
@@ -49,7 +48,6 @@ istream &operator>>(istream &is, Punto &p) {
 
   p.setLatitud(d[0]);
   p.setLongitud(d[1]);
-  /* cerr << p; */
   return is;
 }
 

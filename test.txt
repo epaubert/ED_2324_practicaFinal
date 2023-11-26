@@ -1,0 +1,16 @@
+Iteración 0
+Ruta encontrada
+Ruta leida: R1	5	(34.5204, 69.2008)
+ (52.5079, 13.4261)
+ (7.40665, 12.3446)
+ (-0.186596, -78.4305)
+ (40.4005, -3.59165)
+ 
+Almacen de momento: antes del bucleeeeee
+R1	5	(34.5204, 69.2008)
+ (52.5079, 13.4261)
+ (7.40665, 12.3446)
+ (-0.186596, -78.4305)
+ (40.4005, -3.59165)
+ 
+en el bucle woooo :::::::pruebas/rutas_aereas.sh: línea 3: 39662 Violación de segmento  (`core' generado) ./ruta_aerea datos/paises.txt datos/imagenes/mapas/mapa1.ppm datos/imagenes/banderas datos/almacen_rutas.txt datos/imagenes/aviones/avion1.ppm datos/imagenes/aviones/mascara_avion1.ppm

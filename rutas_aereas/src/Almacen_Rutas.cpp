@@ -34,16 +34,16 @@ Almacen_Rutas::const_iterator Almacen_Rutas::cend() const {
 Ruta &Almacen_Rutas::iterator::operator*() { return p->second; }
 
 Almacen_Rutas::iterator Almacen_Rutas::iterator::operator++() {
-  ++p;
+  p++;
   return *this;
 }
 
 bool Almacen_Rutas::iterator::operator==(const iterator &it) const {
-  return *p == *it.p;
+  return p == it.p;
 }
 
 bool Almacen_Rutas::iterator::operator!=(const iterator &it) const {
-  return *p != *it.p;
+  return p != it.p;
 }
 
 const Ruta &Almacen_Rutas::const_iterator::operator*() const {
@@ -51,40 +51,35 @@ const Ruta &Almacen_Rutas::const_iterator::operator*() const {
 }
 
 Almacen_Rutas::const_iterator Almacen_Rutas::const_iterator::operator++() {
-
   ++p;
   return *this;
 }
 
 bool Almacen_Rutas::const_iterator::operator==(const const_iterator &it) const {
 
-  return *p == *it.p;
+  return p == it.p;
 }
 bool Almacen_Rutas::const_iterator::operator!=(const const_iterator &it) const {
-  return *p != *it.p;
+  return p != it.p;
 }
 
-std::istream &operator>>(std::istream &is, Almacen_Rutas &R) {
-  Ruta r;
+istream &operator>>(istream &is, Almacen_Rutas &R) {
   while (!is.eof()) {
-    if (is.peek() == '#') {
+    Ruta r;
+    if (is.peek() != 'R') {
       is.ignore(8, '\n');
     } else {
       is >> r;
-      cerr << "Ruta leida: " << r << endl;
       R.Insertar(r);
-      cerr << "Almacen de momento: " << R << endl;
     }
   }
-  /* cerr << "Almacen: "; */
-  /* cerr << R << endl; */
   return is;
 }
 
-std::ostream &operator<<(std::ostream &os, const Almacen_Rutas &R) {
+ostream &operator<<(ostream &os, const Almacen_Rutas &R) {
   Almacen_Rutas::const_iterator it;
   for (it = R.cbegin(); it != R.cend(); ++it) {
-    os << *it << "\n";
+    os << *it << endl;
   }
   return os;
 }

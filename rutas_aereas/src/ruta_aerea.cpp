@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
   }
 
   Almacen_Rutas a;
-  cout << "leyendo" << endl;
+  cout << "leyendo..." << endl << endl;
   rutasDisponibles >> a;
   cout << "escribiendo" << endl;
   cout << a;

@@ -6,9 +6,10 @@ void Ruta::Insertar(const Punto &n) { puntos.push_back(n); }
 void Ruta::Borrar(const Punto &n) { puntos.remove(n); }
 
 string Ruta::getCode() const { return code; }
-void Ruta::setCode(const string &code) { this->code = code; }
+void Ruta::setCode(const string &_code) { code = _code; }
 
-bool Ruta::operator==(const Ruta &R) const { return this->code == R.getCode(); }
+bool Ruta::operator==(const Ruta &R) const { return getCode() == R.getCode(); }
+bool Ruta::operator!=(const Ruta &R) const { return getCode() != R.getCode(); }
 bool Ruta::operator<(const Ruta &R) const {
   return this->puntos.size() < R.puntos.size();
 }
@@ -61,9 +62,7 @@ bool Ruta::iterator::operator!=(const iterator &it) const {
   return *p != *it.p;
 }
 
-const Punto &Ruta::const_iterator::operator*() const {
-  return *p;
-}
+const Punto &Ruta::const_iterator::operator*() const { return *p; }
 
 Ruta::const_iterator Ruta::const_iterator::operator++() {
   ++p;
@@ -78,7 +77,6 @@ bool Ruta::const_iterator::operator!=(const const_iterator &it) const {
   return p != it.p;
 }
 
-
 istream &operator>>(istream &is, Ruta &R) {
   string s;
   int size;
@@ -87,8 +85,6 @@ istream &operator>>(istream &is, Ruta &R) {
   while (is.peek() != 'R') {
     is.get();
   }
-
-  cerr << "Ruta encontrada" << endl;
 
   is >> s;
   R.setCode(s);
@@ -99,14 +95,14 @@ istream &operator>>(istream &is, Ruta &R) {
     R.Insertar(p);
   }
 
-  /* cerr << "Ruta: "; */
-  /* cerr << R << endl; */
   return is;
 }
 
 ostream &operator<<(ostream &os, const Ruta &R) {
   os << R.getCode() << "\t" << R.puntos.size() << "\t";
-  for (auto it = R.cbegin(); it != R.cend(); ++it) {
+  Ruta::const_iterator it;
+  for (it = R.cbegin(); it != R.cend(); ++it) {
     os << *it << " ";
   }
+  return os;
 }

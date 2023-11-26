@@ -22,6 +22,7 @@ public:
   void setCode(const string &code);
 
   bool operator==(const Ruta &R) const;
+  bool operator!=(const Ruta &R) const;
   bool operator<(const Ruta &R) const;
 
   class iterator {
