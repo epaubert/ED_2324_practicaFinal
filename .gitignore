@@ -51,3 +51,6 @@ doc_doxygen/
 pruebapegado
 pruebarotacion
 ruta_aerea
+
+# cores
+core.*
