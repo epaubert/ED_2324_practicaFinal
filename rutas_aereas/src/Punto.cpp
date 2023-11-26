@@ -52,7 +52,7 @@ istream &operator>>(istream &is, Punto &p) {
 }
 
 ostream &operator<<(ostream &os, const Punto &p) {
-  os << "(" << p.lat << ", " << p.lng << ")" << endl;
+  os << "(" << p.lat << ", " << p.lng << ")";
   return os;
 }
 
