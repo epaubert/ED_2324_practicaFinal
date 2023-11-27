@@ -24,7 +24,7 @@ void mostrar_rutas(const Almacen_Rutas &A, const Paises &P) {
 
           cout << coordenada;
 
-          P.find(coordenada);
+          P.find(Punto(coordenada));
         }
 
         cout << endl;
