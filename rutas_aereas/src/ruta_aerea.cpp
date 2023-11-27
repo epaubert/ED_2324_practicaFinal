@@ -19,15 +19,12 @@ void mostrar_rutas(const Almacen_Rutas &A, const Paises &P) {
     cout << aux.getCode() << endl;
 
     for (it2 = aux.cbegin(); it2 != aux.cend(); ++it2) {
-      Punto coordenada;
-      coordenada = *it2;
+      Paises::iterator pais;
 
-      cout << coordenada;
-
-          P.find(Punto(coordenada));
-        }
-
-        cout << endl;
+      pais = P.find(*it2);
+        if(it2!= aux.cend())
+          cout << *pais;
+          else cout << "No encontradao" << endl;
     }
 
     cout << endl;

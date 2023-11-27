@@ -30,7 +30,7 @@ Paises::const_iterator Paises::end() const {
   return it;
 }
 
-Paises::iterator Paises::find(const Pais &p) const {
+Paises::iterator Paises::find(const Pais &p) const{
   iterator it;
   set<Pais>::iterator i;
   for (i = datos.begin(); i != datos.end() && !((*i) == p); ++i)
@@ -39,7 +39,7 @@ Paises::iterator Paises::find(const Pais &p) const {
   return it;
 }
 
-Paises::iterator Paises::find(const Punto &p) const {
+Paises::iterator Paises::find(const Punto &p) const{
   iterator it;
   set<Pais>::iterator i;
   for (i = datos.begin(); i != datos.end() && !((*i) == p); ++i)
@@ -90,7 +90,7 @@ istream &operator>>(istream &is, Paises &R) {
       R.Insertar(P);
     }
   }
-
+  
   return is;
 }
 
