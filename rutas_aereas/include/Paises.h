@@ -45,8 +45,8 @@ public:
   const_iterator begin() const;
   iterator end();
   const_iterator end() const;
-  iterator find(const Pais &p);
-  iterator find(const Punto &p);
+  iterator find(const Pais &p) const;
+  iterator find(const Punto &p) const;
 
   /* friend class iterator; */
   /* friend class const_iterator; */
