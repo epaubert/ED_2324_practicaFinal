@@ -8,19 +8,29 @@
 #include <list>
 using namespace std;
 
-/* void mostrar_rutas(const Almacen_Rutas &A, const string &archivo_paises, const Paises &P) {
-  ifstream paises(archivo_paises);
-  string line;
+void mostrar_rutas(const Almacen_Rutas &A, const Paises &P) {
+    cout << "Rutas disponibles: " << endl;
+    Almacen_Rutas::const_iterator it;
+    Ruta::const_iterator it2;
 
-  if (!paises.is_open()) {
-    cerr << "No se pudo abrir el archivo de rutas" << endl;
-  }
+    for(it = A.cbegin(); it != A.cend(); ++it){
+        Ruta aux = *it;
 
-  paises >> P;
-  
+        cout << aux.getCode() << endl;
 
-  paises.close();
-} */
+        for(it2 = aux.cbegin(); it2 != aux.cend(); ++it2){
+          Punto coordenada;
+          coordenada = *it2;
+
+          cout << coordenada;
+
+          P.find(coordenada);
+        }
+
+        cout << endl;
+    }
+
+} 
 
 int main(int argc, char *argv[]) {
   if (argc != 7) {
@@ -50,7 +60,6 @@ int main(int argc, char *argv[]) {
   rutasDisponibles.close();
 
   ifstream lista_paises(argv[1]);
-  string line;
   Paises p;
   
 
@@ -60,13 +69,12 @@ int main(int argc, char *argv[]) {
   }
   
   lista_paises >> p;
-  cout << p;
-  
-  lista_paises.close();
-  /*
-  cout << p ;
 
-  paises.close(); */
+  lista_paises.close();
+
+  /////////////////////////////////////////////////////////////////////////////////
+
+  mostrar_rutas(a, p);
 
   return 0;
 }

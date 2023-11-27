@@ -80,8 +80,6 @@ bool Paises::const_iterator::operator!=(const const_iterator &it) const {
 
 istream &operator>>(istream &is, Paises &R) {
 
-  cerr << "Leyendo Paises" << endl;
-
   while (!is.eof()) {
     if (is.peek() == '#') {
       string a;
@@ -92,19 +90,16 @@ istream &operator>>(istream &is, Paises &R) {
       R.Insertar(P);
     }
   }
-  cerr << "Desde paises.cpp: \n" << R << endl;
+  
   return is;
 }
 
 ostream &operator<<(ostream &os, const Paises &R) {
   Paises::const_iterator it;
-  cerr << "Puede esta aqui el problema?";
+
   for (it = R.begin(); it != R.end(); ++it) {
-    cerr << "Dentro del bucle" << endl;
     os << *it << "\t";
-    cerr << "EYYYYYYY\n";
   }
-      cerr << "Fuera del bucle" << endl;
 
   return os;
 }
