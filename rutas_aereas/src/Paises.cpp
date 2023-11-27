@@ -78,12 +78,6 @@ bool Paises::const_iterator::operator!=(const const_iterator &it) const {
   return p != it.p;
 }
 
-// TODO:
-/* Pais Paises::iterator::operator*() { return *p; } */
-/* Paises::const_iterator Paises::const_iterator::operator*() const {} */
-/* const Pais Paises::iterator::operator++() { return *p; } */
-/* Paises::const_iterator Paises::const_iterator::operator++() const {} */
-
 istream &operator>>(istream &is, Paises &R) {
 
   cerr << "Leyendo Paises" << endl;
@@ -92,12 +86,13 @@ istream &operator>>(istream &is, Paises &R) {
     if (is.peek() == '#') {
       string a;
       getline(is, a);
-    }else{
+    } else {
       Pais P;
       is >> P;
       R.Insertar(P);
-    } 
+    }
   }
+  cerr << "Desde paises.cpp: \n" << R << endl;
   return is;
 }
 
@@ -106,6 +101,7 @@ ostream &operator<<(ostream &os, const Paises &R) {
   cerr << "Puede esta aqui el problema?";
   for (it = R.begin(); it != R.end(); ++it) {
     os << *it << "\t";
+    cerr << "EYYYYYYY\n";
   }
   return os;
 }
