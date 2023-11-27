@@ -105,7 +105,10 @@ ostream &operator<<(ostream &os, const Paises &R) {
   Paises::const_iterator it;
   cerr << "Puede esta aqui el problema?";
   for (it = R.begin(); it != R.end(); ++it) {
+    cerr << "Dentro del bucle" << endl;
     os << *it << "\t";
   }
+      cerr << "Fuera del bucle" << endl;
+
   return os;
 }
