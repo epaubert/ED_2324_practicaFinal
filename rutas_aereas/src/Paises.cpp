@@ -1,5 +1,4 @@
 #include "../include/Paises.h"
-#include <iterator>
 
 Paises::Paises() {}
 Paises::Paises(const Paises &P) { datos = P.datos; }
@@ -57,11 +56,11 @@ Paises::iterator Paises::iterator::operator++() {
 }
 
 bool Paises::iterator::operator==(const iterator &it) const {
-  return *p == *(it.p);
+  return p == it.p;
 }
 
 bool Paises::iterator::operator!=(const iterator &it) const {
-  return *p != *(it.p);
+  return p != it.p;
 }
 
 const Pais &Paises::const_iterator::operator*() const { return *p; }
@@ -72,11 +71,11 @@ Paises::const_iterator Paises::const_iterator::operator++() {
 }
 
 bool Paises::const_iterator::operator==(const const_iterator &it) const {
-  return *p == *(it.p);
+  return p == it.p;
 }
 
 bool Paises::const_iterator::operator!=(const const_iterator &it) const {
-  return *p != *(it.p);
+  return p != it.p;
 }
 
 // TODO:
@@ -86,23 +85,25 @@ bool Paises::const_iterator::operator!=(const const_iterator &it) const {
 /* Paises::const_iterator Paises::const_iterator::operator++() const {} */
 
 istream &operator>>(istream &is, Paises &R) {
-  Paises rlocal;
-  // leemos el comentario
-  if (is.peek() == '#') {
-    string a;
-    getline(is, a);
-  }
 
-  Pais P;
-  while (is >> P) {
-    rlocal.Insertar(P);
+  cerr << "Leyendo Paises" << endl;
+
+  while (!is.eof()) {
+    if (is.peek() == '#') {
+      string a;
+      getline(is, a);
+    }else{
+      Pais P;
+      is >> P;
+      R.Insertar(P);
+    } 
   }
-  R = rlocal;
   return is;
 }
 
 ostream &operator<<(ostream &os, const Paises &R) {
   Paises::const_iterator it;
+  cerr << "Puede esta aqui el problema?";
   for (it = R.begin(); it != R.end(); ++it) {
     os << *it << "\t";
   }

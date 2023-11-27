@@ -16,19 +16,12 @@ public:
   void Insertar(const Pais &P);
   void Borrar(const Pais &P);
 
-  class const_iterator;
-
   class iterator {
   private:
     set<Pais>::iterator p;
 
   public:
     friend class Paises;
-    friend class const_iterator;
-    /* iterator(); */
-    /* iterator(set<Paises>::iterator it); */
-    /* iterator(Paises::iterator &it); */
-
     const Pais &operator*();
     iterator operator++();
     bool operator==(const iterator &it) const;
@@ -41,10 +34,6 @@ public:
 
   public:
     friend class Paises;
-    /* const_iterator(); */
-    /* const_iterator(set<Paises>::iterator it); */
-    /* const_iterator(Paises::const_iterator &it); */
-
     const Pais &operator*() const;
     const_iterator operator++();
     bool operator==(const const_iterator &it) const;
@@ -66,4 +55,5 @@ public:
   friend ostream &operator<<(ostream &os, const Paises &R);
 };
 
+#include "../src/Paises.cpp"
 #endif

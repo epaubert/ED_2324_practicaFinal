@@ -36,4 +36,5 @@ public:
   friend ostream &operator<<(ostream &os, const Pais &P) ;
 };
 
+#include "../src/Pais.cpp"
 #endif

@@ -1,5 +1,6 @@
 #include "../include/Almacen_Rutas.h"
 #include "../include/imagen.h"
+#include "../include/Paises.h"
 #include <cmath>
 #include <cstdlib>
 #include <fstream>
@@ -7,26 +8,19 @@
 #include <list>
 using namespace std;
 
-void mostrar_rutas(ifstream &archivo) {
-  string line, aux = "";
-  list<string> lista_rutas;
-  bool leyendo;
-  while (getline(archivo, line)) {
+/* void mostrar_rutas(const Almacen_Rutas &A, const string &archivo_paises, const Paises &P) {
+  ifstream paises(archivo_paises);
+  string line;
 
-    if (line[0] != '#') {
-      if (line[0] == 'R') {
-        cout << aux << endl;
-        aux = "";
-      }
-      for (int i = 0; i < line.length(); i++) {
-        if (!isspace(line[i])) {
-          aux += line[i];
-        }
-      }
-    }
+  if (!paises.is_open()) {
+    cerr << "No se pudo abrir el archivo de rutas" << endl;
   }
-  cout << aux << endl;
-}
+
+  paises >> P;
+  
+
+  paises.close();
+} */
 
 int main(int argc, char *argv[]) {
   if (argc != 7) {
@@ -41,18 +35,38 @@ int main(int argc, char *argv[]) {
   }
 
   ifstream rutasDisponibles(argv[4]);
+
   if (!rutasDisponibles.is_open()) {
     cerr << "No se pudo abrir el archivo de rutas" << endl;
     return 1;
   }
 
   Almacen_Rutas a;
+  
   cout << "leyendo..." << endl << endl;
   rutasDisponibles >> a;
   cout << "escribiendo" << endl;
-  cout << a;
 
   rutasDisponibles.close();
+
+  ifstream lista_paises(argv[1]);
+  string line;
+  Paises p;
+  
+
+  if (!lista_paises.is_open()) {
+      cerr << "No se pudo abrir el archivo de paises" << endl;
+      return 1;
+  }
+  
+  lista_paises >> p;
+  cout << p;
+  
+  lista_paises.close();
+  /*
+  cout << p ;
+
+  paises.close(); */
 
   return 0;
 }

@@ -3,11 +3,7 @@
 #include "../include/Punto.h"
 #include "../include/Pais.h"
 
-Pais::Pais() {
-    p = Punto();
-    pais = "";
-    bandera = "";
-}
+Pais::Pais() {}
 
 Pais::Pais(const Pais &P) {
     p = P.GetPunto();
@@ -57,6 +53,8 @@ istream &operator>>(istream &is, Pais &P) {
     string pais, bandera;
 
     is >> lat >> lng >> pais >> bandera;
+
+    cerr << lat << " " << lng << " " << pais << " " << bandera << " " << endl;
 
     P.SetBandera(bandera);
     P.SetPais(pais);
