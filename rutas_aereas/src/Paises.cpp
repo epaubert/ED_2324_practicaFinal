@@ -6,44 +6,47 @@ Paises::Paises(const Paises &P) { datos = P.datos; }
 void Paises::Insertar(const Pais &P) { datos.insert(P); }
 void Paises::Borrar(const Pais &P) { datos.erase(P); }
 
-Paises::iterator Paises::begin() {
+Paises::iterator Paises::begin() const {
   Paises::iterator it;
   it.p = datos.begin();
   return it;
 }
 
-Paises::const_iterator Paises::begin() const {
+Paises::const_iterator Paises::cbegin() const {
   Paises::const_iterator it;
   it.p = datos.cbegin();
   return it;
 }
 
-Paises::iterator Paises::end() {
+Paises::iterator Paises::end() const {
   Paises::iterator it;
   it.p = datos.end();
   return it;
 }
 
-Paises::const_iterator Paises::end() const {
+Paises::const_iterator Paises::cend() const {
   Paises::const_iterator it;
   it.p = datos.cend();
   return it;
 }
 
-Paises::iterator Paises::find(const Pais &p) const{
+Paises::iterator Paises::find(const Pais &p) const {
   iterator it;
   set<Pais>::iterator i;
-  for (i = datos.begin(); i != datos.end() && !((*i) == p); ++i)
+  for (i = datos.begin(); i != datos.end() && *i != p; ++i)
+    /* for (i = datos.begin(); i != datos.end() && !((*i) == p); ++i) */
     ;
   it.p = i;
   return it;
 }
 
-Paises::iterator Paises::find(const Punto &p) const{
+Paises::iterator Paises::find(const Punto &p) const {
   iterator it;
   set<Pais>::iterator i;
-  for (i = datos.begin(); i != datos.end() && !((*i) == p); ++i)
+  for (i = datos.begin(); i != datos.end() && (*i) != p; ++i)
     ;
+  if (i != datos.end())
+    cerr << "ENCONTRADO" << endl;
   it.p = i;
   return it;
 }
@@ -90,15 +93,15 @@ istream &operator>>(istream &is, Paises &R) {
       R.Insertar(P);
     }
   }
-  
+
   return is;
 }
 
 ostream &operator<<(ostream &os, const Paises &R) {
   Paises::const_iterator it;
 
-  for (it = R.begin(); it != R.end(); ++it) {
-    os << *it << "\t";
+  for (it = R.cbegin(); it != R.cend(); ++it) {
+    os << *it << endl;
   }
 
   return os;

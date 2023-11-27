@@ -6,7 +6,8 @@ Punto::Punto(float _lat, float _lng, string s) {
   lat = _lat;
   lng = _lng;
   nom = s;
-};
+}
+
 Punto::Punto(const Punto &p) {
   lat = p.lat;
   lng = p.lng;

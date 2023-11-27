@@ -15,6 +15,7 @@ private:
 
 public:
   Ruta();
+  Ruta(const Ruta &R);
   void Insertar(const Punto &n);
   void Borrar(const Punto &n);
 
@@ -51,7 +52,6 @@ public:
 
   iterator begin();
   const_iterator cbegin() const;
-
   iterator end();
   const_iterator cend() const;
 

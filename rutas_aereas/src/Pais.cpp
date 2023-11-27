@@ -7,7 +7,7 @@ Pais::Pais() {}
 
 Pais::Pais(const Pais &P) {
   p = P.GetPunto();
-  pais = P.GetBandera();
+  pais = P.GetPais();
   bandera = P.GetBandera();
 }
 
@@ -55,11 +55,11 @@ istream &operator>>(istream &is, Pais &P) {
 
   P.SetBandera(bandera);
   P.SetPais(pais);
-  P.SetPunto(Punto(lat, lng, ""));
+  P.SetPunto(Punto(lat, lng, pais));
   return is;
 }
 
 ostream &operator<<(ostream &os, const Pais &P) {
-  os << P.p << " " << P.pais << " " << P.bandera << endl;
+  os << P.p << " " << P.pais << " " << P.bandera;
   return os;
 }

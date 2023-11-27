@@ -1,6 +1,10 @@
 #include "../include/Ruta.h"
 
 Ruta::Ruta() {}
+Ruta::Ruta(const Ruta &R) {
+  puntos = R.puntos;
+  code = R.code;
+}
 
 void Ruta::Insertar(const Punto &n) { puntos.push_back(n); }
 void Ruta::Borrar(const Punto &n) { puntos.remove(n); }

@@ -16,15 +16,17 @@ void mostrar_rutas(const Almacen_Rutas &A, const Paises &P) {
   for (it = A.cbegin(); it != A.cend(); ++it) {
     Ruta aux = *it;
 
-    cout << aux.getCode() << endl;
+    /* cout << aux << endl; */
 
     for (it2 = aux.cbegin(); it2 != aux.cend(); ++it2) {
-      Paises::iterator pais;
 
-      pais = P.find(*it2);
-        if(it2!= aux.cend())
-          cout << *pais;
-          else cout << "No encontradao" << endl;
+      auto pais = P.find(*it2);
+      /* cerr << "it2: " << *it2 << endl; */
+
+      if (pais != P.end())
+        cout << *pais;
+      else
+        cout << "No encontrado: " << *pais << endl;
     }
 
     cout << endl;
@@ -66,7 +68,13 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
+  /* cerr << "Paises antes de leer: \n"; */
+  /* cerr << p; */
+
   lista_paises >> p;
+
+  /* cerr << "Paises después de leer: \n"; */
+  /* cerr << p; */
 
   lista_paises.close();
 

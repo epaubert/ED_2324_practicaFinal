@@ -34,17 +34,17 @@ public:
 
   public:
     friend class Paises;
+    friend class Paises::iterator;
     const Pais &operator*() const;
     const_iterator operator++();
     bool operator==(const const_iterator &it) const;
     bool operator!=(const const_iterator &it) const;
   };
 
-  // TODO:
-  iterator begin();
-  const_iterator begin() const;
-  iterator end();
-  const_iterator end() const;
+  iterator begin() const;
+  const_iterator cbegin() const;
+  iterator end() const;
+  const_iterator cend() const;
   iterator find(const Pais &p) const;
   iterator find(const Punto &p) const;
 
