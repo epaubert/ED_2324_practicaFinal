@@ -2,8 +2,8 @@
 #define _PAISES_H_
 
 #include "Pais.h"
+#include <cmath>
 #include <set>
-#include<cmath>
 
 using namespace std;
 
@@ -48,7 +48,7 @@ public:
   iterator end() const;
   const_iterator cend() const;
   iterator find(const Pais &p) const;
-  Pais find(const Punto &p) const;
+  iterator find(const Punto &p) const;
 
   /* friend class iterator; */
   /* friend class const_iterator; */

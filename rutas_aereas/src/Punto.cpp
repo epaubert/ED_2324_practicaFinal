@@ -17,12 +17,17 @@ Punto::Punto(const Punto &p) {
 Punto::~Punto() {}
 
 bool Punto::operator==(const Punto &p) const {
-  return lat == p.lat && lng == p.lng;
+  if (lat == p.lat && lng == p.lng)
+    return true;
+  else {
+    double error = 1.0e-1;
+    bool lat_iguales = abs(lat - p.lat) < error;
+    bool lng_iguales = abs(lng - p.lng) < error;
+    return lat_iguales && lng_iguales;
+  }
 }
 
-bool Punto::operator!=(const Punto &p) const {
-  return lat != p.lat && lng != p.lng;
-}
+bool Punto::operator!=(const Punto &p) const { return !(operator==(p)); }
 
 istream &operator>>(istream &is, Punto &p) {
   double d[2];

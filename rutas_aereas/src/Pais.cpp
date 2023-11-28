@@ -39,11 +39,11 @@ bool Pais::operator==(const Pais &P) const {
          p.getLongitud() == P.GetPunto().getLongitud();
 }
 
-bool Pais::operator!=(const Pais &P) const { return !(*this == P); }
-
-bool Pais::operator==(const Punto &P) const {
-  return p.getLatitud() == P.getLatitud() && p.getLongitud() == P.getLongitud();
+bool Pais::operator!=(const Pais &P) const {
+  return GetPunto() != P.GetPunto();
 }
+
+bool Pais::operator==(const Punto &P) const { return GetPunto() == P; }
 
 bool Pais::operator!=(const Punto &P) const { return !(*this == P); }
 
