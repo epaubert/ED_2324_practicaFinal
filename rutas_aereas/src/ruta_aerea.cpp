@@ -8,26 +8,6 @@
 #include <list>
 using namespace std;
 
-void mostrar_rutas(const Almacen_Rutas &A, const Paises &P) {
-  cout << "Rutas disponibles: " << endl;
-  Almacen_Rutas::const_iterator it;
-  Ruta::const_iterator it2;
-
-  for (it = A.cbegin(); it != A.cend(); ++it) {
-    Ruta ruta = *it;
-
-    cout << "Ruta " << ruta.getCode() << endl;
-    for (it2 = ruta.cbegin(); it2 != ruta.cend(); ++it2) {
-      auto aux = P.find(*it2);
-      if (aux != P.end()) {
-        cerr << (*aux).GetPais() << " / ";
-      } else {
-      }
-    }
-    cout << endl;
-  }
-}
-
 int main(int argc, char *argv[]) {
   if (argc != 7) {
     cout << "Los parametros son :" << endl;
@@ -75,7 +55,7 @@ int main(int argc, char *argv[]) {
 
   /////////////////////////////////////////////////////////////////////////////////
 
-  mostrar_rutas(a, p);
+  a.mostrarRutas(p);
 
   return 0;
 }

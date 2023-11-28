@@ -9,6 +9,47 @@ Ruta Almacen_Rutas::GetRuta(const std::string &s) {
   return rutas.find(s)->second;
 }
 
+void Almacen_Rutas::mostrarRutas(const Paises &P) const {
+  cout << "Rutas disponibles: " << endl;
+  Almacen_Rutas::const_iterator it;
+  Ruta::const_iterator it2;
+
+  for (it = cbegin(); it != cend(); ++it) {
+    Ruta ruta = *it;
+
+    cout << ": Ruta " << ruta.getCode() << endl;
+    for (it2 = ruta.cbegin(); it2 != ruta.cend(); ++it2) {
+      auto aux = P.find(*it2);
+      if (aux != P.end()) {
+        cout << (*aux).GetPais() << " / ";
+      }
+      /* else { */
+      /*      cerr << "ERROR: NO ENCONTRADO" */
+      /*           << " / "; */
+      /*    } */
+    }
+    cout << endl;
+  }
+}
+
+Ruta Almacen_Rutas::elijeRuta(const Paises &P) const {
+  bool end = false;
+  string opcion;
+  map<std::string, Ruta>::iterator ruta;
+  while (!end) {
+    cout << "Elija una ruta:" << endl;
+    mostrarRutas(P);
+    cin >> opcion;
+    ruta = rutas.find(opcion);
+    if (ruta != rutas.end()) {
+      end = true;
+    } else {
+      cout << "Código no válido" << endl;
+    }
+  }
+  return ruta->second;
+}
+
 Almacen_Rutas::iterator Almacen_Rutas::begin() {
   Almacen_Rutas::iterator it;
   it.p = rutas.begin();

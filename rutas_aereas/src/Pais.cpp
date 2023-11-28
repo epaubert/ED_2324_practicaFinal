@@ -35,8 +35,7 @@ bool Pais::operator<(const Pais &P) const {
 }
 
 bool Pais::operator==(const Pais &P) const {
-  return p.getLatitud() == P.GetPunto().getLatitud() &&
-         p.getLongitud() == P.GetPunto().getLongitud();
+  return GetPunto() == P.GetPunto();
 }
 
 bool Pais::operator!=(const Pais &P) const {
@@ -45,7 +44,7 @@ bool Pais::operator!=(const Pais &P) const {
 
 bool Pais::operator==(const Punto &P) const { return GetPunto() == P; }
 
-bool Pais::operator!=(const Punto &P) const { return !(*this == P); }
+bool Pais::operator!=(const Punto &P) const { return GetPunto() != P; }
 
 istream &operator>>(istream &is, Pais &P) {
   double lat, lng;

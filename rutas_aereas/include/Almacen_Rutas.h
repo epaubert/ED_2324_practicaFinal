@@ -1,3 +1,4 @@
+#include "../include/Paises.h"
 #include "../include/Ruta.h"
 #include <iostream>
 #include <map>
@@ -43,6 +44,11 @@ public:
   const_iterator cbegin() const;
   iterator end();
   const_iterator cend() const;
+
+  iterator find(std::string) const;
+
+  void mostrarRutas(const Paises &P) const;
+  Ruta elijeRuta(const Paises &P) const;
 
   friend std::istream &operator>>(std::istream &is, Almacen_Rutas &R);
   friend std::ostream &operator<<(std::ostream &os, const Almacen_Rutas &R);
