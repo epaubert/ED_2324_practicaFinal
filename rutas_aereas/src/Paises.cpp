@@ -40,15 +40,42 @@ Paises::iterator Paises::find(const Pais &p) const {
   return it;
 }
 
-Paises::iterator Paises::find(const Punto &p) const {
-  iterator it;
-  set<Pais>::iterator i;
-  for (i = datos.begin(); i != datos.end() && (*i) != p; ++i)
-    ;
-  if (i != datos.end())
-    cerr << "ENCONTRADO" << endl;
-  it.p = i;
-  return it;
+Pais Paises::find(const Punto &p) const {
+  set<Pais>::const_iterator it;
+  
+  double lat, lng, result;
+  double plat = abs(p.getLatitud()), plng = abs(p.getLongitud());
+
+  for(it = datos.cbegin(); it != datos.cend(); ++it){
+    bool iguales = true;
+
+    lat = abs(it->GetPunto().getLatitud());
+    lng = abs(it->GetPunto().getLongitud());
+
+    if(lat > plat){
+      result = lat - plat;
+    }else{
+      result = plat - lat;
+    }
+
+    if(result > UMBRAL){
+      iguales = false;
+    }
+
+    if(lng > plng){
+      result = lng - plng;
+    }else{
+      result = plng - lng;
+    }
+
+    if(result > UMBRAL){
+      iguales = false;
+    }
+
+    if(iguales == true){
+      return *it;
+    }
+  }
 }
 
 const Pais &Paises::iterator::operator*() { return *p; }

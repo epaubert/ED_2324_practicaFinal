@@ -3,12 +3,14 @@
 
 #include "Pais.h"
 #include <set>
+#include<cmath>
 
 using namespace std;
 
 class Paises {
 private:
   set<Pais> datos;
+  const double UMBRAL = 1.0e-5;
 
 public:
   Paises();
@@ -46,7 +48,7 @@ public:
   iterator end() const;
   const_iterator cend() const;
   iterator find(const Pais &p) const;
-  iterator find(const Punto &p) const;
+  Pais find(const Punto &p) const;
 
   /* friend class iterator; */
   /* friend class const_iterator; */

@@ -13,22 +13,13 @@ void mostrar_rutas(const Almacen_Rutas &A, const Paises &P) {
   Almacen_Rutas::const_iterator it;
   Ruta::const_iterator it2;
 
-  for (it = A.cbegin(); it != A.cend(); ++it) {
-    Ruta aux = *it;
+  for(it = A.cbegin(); it != A.cend(); ++it){
+    Ruta ruta = *it;
 
-    /* cout << aux << endl; */
-
-    for (it2 = aux.cbegin(); it2 != aux.cend(); ++it2) {
-
-      auto pais = P.find(*it2);
-      /* cerr << "it2: " << *it2 << endl; */
-
-      if (pais != P.end())
-        cout << *pais;
-      else
-        cout << "No encontrado: " << *pais << endl;
+    cout << "Ruta " << ruta.getCode() << endl;
+    for(it2 = ruta.cbegin(); it2 != ruta.cend(); ++it2){
+      cout << P.find(*it2).GetPais() << " / ";
     }
-
     cout << endl;
   }
 }
