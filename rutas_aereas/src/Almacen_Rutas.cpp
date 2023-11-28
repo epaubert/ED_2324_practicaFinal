@@ -17,7 +17,7 @@ void Almacen_Rutas::mostrarRutas(const Paises &P) const {
   for (it = cbegin(); it != cend(); ++it) {
     Ruta ruta = *it;
 
-    cout << ": Ruta " << ruta.getCode() << endl;
+    cout << "Ruta " << ruta.getCode() << endl;
     for (it2 = ruta.cbegin(); it2 != ruta.cend(); ++it2) {
       auto aux = P.find(*it2);
       if (aux != P.end()) {
@@ -32,22 +32,11 @@ void Almacen_Rutas::mostrarRutas(const Paises &P) const {
   }
 }
 
-Ruta Almacen_Rutas::elijeRuta(const Paises &P) const {
-  bool end = false;
-  string opcion;
-  map<std::string, Ruta>::iterator ruta;
-  while (!end) {
-    cout << "Elija una ruta:" << endl;
-    mostrarRutas(P);
-    cin >> opcion;
-    ruta = rutas.find(opcion);
-    if (ruta != rutas.end()) {
-      end = true;
-    } else {
-      cout << "Código no válido" << endl;
-    }
-  }
-  return ruta->second;
+Almacen_Rutas::const_iterator
+Almacen_Rutas::elijeRuta(const string &opcion) const {
+  Almacen_Rutas::const_iterator it;
+  it.p = rutas.find(opcion);
+  return it;
 }
 
 Almacen_Rutas::iterator Almacen_Rutas::begin() {
@@ -66,6 +55,7 @@ Almacen_Rutas::iterator Almacen_Rutas::end() {
   it.p = rutas.end();
   return it;
 }
+
 Almacen_Rutas::const_iterator Almacen_Rutas::cend() const {
   Almacen_Rutas::const_iterator it;
   it.p = rutas.cend();
@@ -103,6 +93,13 @@ bool Almacen_Rutas::const_iterator::operator==(const const_iterator &it) const {
 bool Almacen_Rutas::const_iterator::operator!=(const const_iterator &it) const {
   return p != it.p;
 }
+
+/* Almacen_Rutas::iterator Almacen_Rutas::find(const std::string &s) const { */
+/*   Almacen_Rutas::iterator it; */
+/*   auto aux = rutas.find(s); */
+/*   it.p = aux; */
+/*   return it; */
+/* } */
 
 istream &operator>>(istream &is, Almacen_Rutas &R) {
   while (!is.eof()) {

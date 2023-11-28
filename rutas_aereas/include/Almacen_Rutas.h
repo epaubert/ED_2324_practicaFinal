@@ -45,10 +45,10 @@ public:
   iterator end();
   const_iterator cend() const;
 
-  iterator find(std::string) const;
+  /* iterator find(std::string) const; */
 
   void mostrarRutas(const Paises &P) const;
-  Ruta elijeRuta(const Paises &P) const;
+  Almacen_Rutas::const_iterator elijeRuta(const string &opcion) const;
 
   friend std::istream &operator>>(std::istream &is, Almacen_Rutas &R);
   friend std::ostream &operator<<(std::ostream &os, const Almacen_Rutas &R);

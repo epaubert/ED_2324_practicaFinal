@@ -8,6 +8,8 @@
 #include <list>
 using namespace std;
 
+Ruta menu(const Almacen_Rutas &A, const Paises &p);
+
 int main(int argc, char *argv[]) {
   if (argc != 7) {
     cout << "Los parametros son :" << endl;
@@ -20,42 +22,46 @@ int main(int argc, char *argv[]) {
     return 0;
   }
 
+  ///// LEYENDO RUTAS
+  cout << "leyendo rutas..." << endl;
   ifstream rutasDisponibles(argv[4]);
-
   if (!rutasDisponibles.is_open()) {
     cerr << "No se pudo abrir el archivo de rutas" << endl;
     return 1;
   }
-
   Almacen_Rutas a;
-
-  cout << "leyendo..." << endl << endl;
   rutasDisponibles >> a;
-  cout << "escribiendo" << endl;
-
   rutasDisponibles.close();
 
+  ///// LEYENDO PAISES
+  cout << "leyendo paises..." << endl;
   ifstream lista_paises(argv[1]);
-  Paises p;
-
   if (!lista_paises.is_open()) {
     cerr << "No se pudo abrir el archivo de paises" << endl;
     return 1;
   }
-
-  /* cerr << "Paises antes de leer: \n"; */
-  /* cerr << p; */
-
+  Paises p;
   lista_paises >> p;
-
-  /* cerr << "Paises después de leer: \n"; */
-  /* cerr << p; */
-
   lista_paises.close();
 
-  /////////////////////////////////////////////////////////////////////////////////
+  cerr << "ejecutando" << endl;
 
-  a.mostrarRutas(p);
+  Ruta r = menu(a, p);
+
+  cout << endl << "Ruta elejida: " << r << endl;
 
   return 0;
+}
+
+Ruta menu(const Almacen_Rutas &A, const Paises &P) {
+  string s = "R0";
+  Almacen_Rutas::const_iterator it = A.cend();
+  do {
+    cout << "Elija una ruta: " << endl;
+    A.mostrarRutas(P);
+    cin >> s;
+    it = A.elijeRuta(s);
+  } while (it == A.cend());
+
+  return *it;
 }
