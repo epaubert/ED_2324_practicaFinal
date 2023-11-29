@@ -12,7 +12,7 @@ void Ruta::Borrar(const Punto &n) { puntos.remove(n); }
 string Ruta::getCode() const { return code; }
 void Ruta::setCode(const string &_code) { code = _code; }
 
-void Ruta::mostrarRuta(const Paises &P) {
+void Ruta::mostrarRuta(const Paises &P, Paises &paisesRuta) {
   const_iterator it;
 
   cout << endl << "Ruta elegida: " << code << endl;
@@ -22,6 +22,7 @@ void Ruta::mostrarRuta(const Paises &P) {
   for(it = cbegin(); it != cend(); ++it){
     auto pais = P.find(*it);
     cout << " -> "<< (*pais).GetPais();
+    paisesRuta.Insertar(*pais);
   }
   cout << endl << endl << "Generando mapa..." << endl;
 }
