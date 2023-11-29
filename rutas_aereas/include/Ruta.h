@@ -21,6 +21,7 @@ public:
 
   string getCode() const;
   void setCode(const string &code);
+  void mostrarRuta(const Paises &P);
 
   bool operator==(const Ruta &R) const;
   bool operator!=(const Ruta &R) const;

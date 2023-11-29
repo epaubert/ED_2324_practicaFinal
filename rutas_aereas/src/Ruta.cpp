@@ -12,6 +12,20 @@ void Ruta::Borrar(const Punto &n) { puntos.remove(n); }
 string Ruta::getCode() const { return code; }
 void Ruta::setCode(const string &_code) { code = _code; }
 
+void Ruta::mostrarRuta(const Paises &P) {
+  const_iterator it;
+
+  cout << endl << "Ruta elegida: " << code << endl;
+  cout << "Numero de destinos de la ruta: " << puntos.size() << endl;
+  cout << "Paises que seran visitados:" << endl;
+
+  for(it = cbegin(); it != cend(); ++it){
+    auto pais = P.find(*it);
+    cout << " -> "<< (*pais).GetPais();
+  }
+  cout << endl << endl << "Generando mapa..." << endl;
+}
+
 bool Ruta::operator==(const Ruta &R) const { return getCode() == R.getCode(); }
 bool Ruta::operator!=(const Ruta &R) const { return getCode() != R.getCode(); }
 bool Ruta::operator<(const Ruta &R) const {

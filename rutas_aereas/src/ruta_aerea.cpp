@@ -48,7 +48,8 @@ int main(int argc, char *argv[]) {
 
   Ruta r = menu(a, p);
 
-  cout << endl << "Ruta elejida: " << r << endl;
+  //cout << endl << "Ruta elejida: " << r << endl;
+  r.mostrarRuta(p);
 
   return 0;
 }

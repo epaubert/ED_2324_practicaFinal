@@ -10,7 +10,7 @@ Ruta Almacen_Rutas::GetRuta(const std::string &s) {
 }
 
 void Almacen_Rutas::mostrarRutas(const Paises &P) const {
-  cout << "Rutas disponibles: " << endl;
+  cout << endl << "Rutas disponibles: " << endl << endl;
   Almacen_Rutas::const_iterator it;
   Ruta::const_iterator it2;
 
@@ -23,12 +23,8 @@ void Almacen_Rutas::mostrarRutas(const Paises &P) const {
       if (aux != P.end()) {
         cout << (*aux).GetPais() << " / ";
       }
-      /* else { */
-      /*      cerr << "ERROR: NO ENCONTRADO" */
-      /*           << " / "; */
-      /*    } */
     }
-    cout << endl;
+    cout << endl << endl;
   }
 }
 
