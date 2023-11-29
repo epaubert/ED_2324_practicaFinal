@@ -90,7 +90,7 @@ int main(int argc, char *argv[]) {
       ++it2;
       x = abs((*it2).getLatitud() - (*it).getLatitud());
       y = abs((*it2).getLongitud() - (*it).getLongitud());
-      angulo = atan(abs(y - x)) * (180 / M_PI);
+      angulo = atan(y - x) * (180 / M_PI);
     }
 
     Imagen avionRotado = Rota(avion, angulo);
