@@ -36,6 +36,7 @@
 *.zip
 *.bak
 pruebas/*.ppm
+.vscode/*
 
 # Build
 CMakeCache.txt
