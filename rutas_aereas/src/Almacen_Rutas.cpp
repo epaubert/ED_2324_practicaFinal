@@ -58,7 +58,8 @@ Almacen_Rutas::const_iterator Almacen_Rutas::cend() const {
   return it;
 }
 
-Ruta &Almacen_Rutas::iterator::operator*() { return p->second; }
+Ruta Almacen_Rutas::iterator::operator*() { return p->second; }
+Ruta *Almacen_Rutas::iterator::operator->() { return &(p->second); }
 
 Almacen_Rutas::iterator Almacen_Rutas::iterator::operator++() {
   p++;
@@ -73,8 +74,12 @@ bool Almacen_Rutas::iterator::operator!=(const iterator &it) const {
   return p != it.p;
 }
 
-const Ruta &Almacen_Rutas::const_iterator::operator*() const {
+const Ruta Almacen_Rutas::const_iterator::operator*() const {
   return p->second;
+}
+
+const Ruta *Almacen_Rutas::const_iterator::operator->() const {
+  return &(p->second);
 }
 
 Almacen_Rutas::const_iterator Almacen_Rutas::const_iterator::operator++() {

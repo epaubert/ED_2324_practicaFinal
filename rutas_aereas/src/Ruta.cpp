@@ -19,9 +19,11 @@ void Ruta::mostrarRuta(const Paises &P, Paises &paisesRuta) {
   cout << "Numero de destinos de la ruta: " << puntos.size() << endl;
   cout << "Paises que seran visitados:" << endl;
 
-  for(it = cbegin(); it != cend(); ++it){
+  for (it = cbegin(); it != cend(); ++it) {
     auto pais = P.find(*it);
-    cout << " -> "<< (*pais).GetPais();
+    if (it != cbegin())
+      cout << " -> ";
+    cout << (*pais).GetPais();
     paisesRuta.Insertar(*pais);
   }
   cout << endl << endl << "Generando mapa..." << endl;
@@ -66,7 +68,9 @@ Ruta::iterator Ruta::find(const Punto &P) {
   return it;
 }
 
-Punto &Ruta::iterator::operator*() { return *p; }
+Punto Ruta::iterator::operator*() { return *p; }
+
+Punto *Ruta::iterator::operator->() { return &(*p); }
 
 Ruta::iterator Ruta::iterator::operator++() {
   ++p;
@@ -81,7 +85,9 @@ bool Ruta::iterator::operator!=(const iterator &it) const {
   return *p != *it.p;
 }
 
-const Punto &Ruta::const_iterator::operator*() const { return *p; }
+const Punto Ruta::const_iterator::operator*() const { return *p; }
+
+const Punto *Ruta::const_iterator::operator->() const { return &(*p); }
 
 Ruta::const_iterator Ruta::const_iterator::operator++() {
   ++p;

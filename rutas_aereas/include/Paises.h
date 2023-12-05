@@ -24,7 +24,8 @@ public:
 
   public:
     friend class Paises;
-    const Pais &operator*();
+    Pais operator*();
+    const Pais *operator->();
     iterator operator++();
     bool operator==(const iterator &it) const;
     bool operator!=(const iterator &it) const;
@@ -37,7 +38,8 @@ public:
   public:
     friend class Paises;
     friend class Paises::iterator;
-    const Pais &operator*() const;
+    const Pais operator*() const;
+    const Pais *operator->() const;
     const_iterator operator++();
     bool operator==(const const_iterator &it) const;
     bool operator!=(const const_iterator &it) const;

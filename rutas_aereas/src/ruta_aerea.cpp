@@ -1,11 +1,11 @@
 #include "../include/Almacen_Rutas.h"
 #include "../include/Paises.h"
 #include "../include/imagen.h"
-#include <math.h>
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <list>
+#include <math.h>
 using namespace std;
 
 Ruta menu(const Almacen_Rutas &A, const Paises &p);
@@ -49,12 +49,13 @@ int main(int argc, char *argv[]) {
 
   Ruta r = menu(a, p);
 
-  //cout << endl << "Ruta elejida: " << r << endl;
-  //paisesRuta sera la lista de paises que conforman la ruta
+  // cout << endl << "Ruta elejida: " << r << endl;
+  // paisesRuta sera la lista de paises que conforman la ruta
   Paises paisesRuta;
   r.mostrarRuta(p, paisesRuta);
 
   /////////////////////NUEVO/////////////////////////////////////
+
   Imagen mapa, bandera, avion;
   Tipo_Pegado tp = BLENDING;
 
@@ -63,39 +64,35 @@ int main(int argc, char *argv[]) {
 
   int posi, posj;
 
-  for(auto it = paisesRuta.cbegin(); it != paisesRuta.cend(); ++it){
+  for (auto it = paisesRuta.cbegin(); it != paisesRuta.cend(); ++it) {
 
     string direccion_bandera = argv[3];
     direccion_bandera += "/";
-    direccion_bandera += (*it).GetBandera();
+    direccion_bandera += it->GetBandera();
 
-    
-
-    posi = (mapa.num_filas() / 180.0) * (90 - (*it).GetPunto().getLatitud());
-    posj = (mapa.num_cols() / 360.0) * (180 + (*it).GetPunto().getLongitud());  
+    posi = (mapa.num_filas() / 180.0) * (90 - it->GetPunto().getLatitud());
+    posj = (mapa.num_cols() / 360.0) * (180 + it->GetPunto().getLongitud());
 
     bandera.LeerImagen(direccion_bandera.c_str());
 
-    
     mapa.PutImagen(posi, posj, bandera);
-    
   }
-  
+
   double angulo, x, y;
 
-  for(auto it = r.cbegin(); it != r.cend(); ++it){
+  for (auto it = r.cbegin(); it != r.cend(); ++it) {
 
-    if(it != r.cend()){
+    if (it != r.cend()) {
       auto it2 = it;
       ++it2;
-      x = abs((*it2).getLatitud() - (*it).getLatitud());
-      y = abs((*it2).getLongitud() - (*it).getLongitud());
+      x = abs(it2->getLatitud() - it->getLatitud());
+      y = abs(it2->getLongitud() - it->getLongitud());
       angulo = atan(y - x) * (180 / M_PI);
     }
 
     Imagen avionRotado = Rota(avion, angulo);
-    posi = (mapa.num_filas() / 180.0) * (90 - (*it).getLatitud());
-    posj = (mapa.num_cols() / 360.0) * (180 + (*it).getLongitud()); 
+    posi = (mapa.num_filas() / 180.0) * (90 - it->getLatitud());
+    posj = (mapa.num_cols() / 360.0) * (180 + it->getLongitud());
 
     mapa.PutImagen(posi, posj, avionRotado, tp);
   }

@@ -1,6 +1,7 @@
 #ifndef _RUTA_H_
 #define _RUTA_H_
 
+#include "../include/Paises.h"
 #include "../include/Punto.h"
 #include <iostream>
 #include <list>
@@ -33,7 +34,8 @@ public:
 
   public:
     friend class Ruta;
-    Punto &operator*();
+    Punto operator*();
+    Punto *operator->();
     iterator operator++();
     bool operator==(const iterator &it) const;
     bool operator!=(const iterator &it) const;
@@ -45,7 +47,8 @@ public:
 
   public:
     friend class Ruta;
-    const Punto &operator*() const;
+    const Punto operator*() const;
+    const Punto *operator->() const;
     const_iterator operator++();
     bool operator==(const const_iterator &it) const;
     bool operator!=(const const_iterator &it) const;

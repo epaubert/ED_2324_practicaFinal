@@ -4,6 +4,11 @@ project(practicafinal)
 set(CMAKE_CXX_STANDARD 14)
 set(BASE_FOLDER rutas_aereas)
 
+# Opciones de compilación: 
+add_compile_options(-O0 -Wall -g -ggdb)
+# Opciones de release: 
+# add_compile_options(-O3 -Wall)
+
 include_directories(${BASE_FOLDER}/include)
 
 add_library(image ${BASE_FOLDER}/src/imagen.cpp  ${BASE_FOLDER}/src/imagenES.cpp)

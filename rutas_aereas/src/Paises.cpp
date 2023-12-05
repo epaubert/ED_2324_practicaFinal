@@ -48,7 +48,9 @@ Paises::iterator Paises::find(const Punto &p) const {
   return it;
 }
 
-const Pais &Paises::iterator::operator*() { return *p; }
+Pais Paises::iterator::operator*() { return *p; }
+
+const Pais *Paises::iterator::operator->() { return &(*p); }
 
 Paises::iterator Paises::iterator::operator++() {
   ++p;
@@ -63,7 +65,9 @@ bool Paises::iterator::operator!=(const iterator &it) const {
   return p != it.p;
 }
 
-const Pais &Paises::const_iterator::operator*() const { return *p; }
+const Pais Paises::const_iterator::operator*() const { return *p; }
+
+const Pais *Paises::const_iterator::operator->() const { return &(*p); }
 
 Paises::const_iterator Paises::const_iterator::operator++() {
   ++p;

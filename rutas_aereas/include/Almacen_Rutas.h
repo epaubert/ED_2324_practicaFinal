@@ -22,7 +22,8 @@ public:
 
   public:
     friend class Almacen_Rutas;
-    Ruta &operator*();
+    Ruta operator*();
+    Ruta *operator->();
     iterator operator++();
     bool operator==(const iterator &it) const;
     bool operator!=(const iterator &it) const;
@@ -34,7 +35,8 @@ public:
 
   public:
     friend class Almacen_Rutas;
-    const Ruta &operator*() const;
+    const Ruta operator*() const;
+    const Ruta *operator->() const;
     const_iterator operator++();
     bool operator==(const const_iterator &it) const;
     bool operator!=(const const_iterator &it) const;
