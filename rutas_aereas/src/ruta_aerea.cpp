@@ -49,12 +49,8 @@ int main(int argc, char *argv[]) {
   lista_paises >> p;
   lista_paises.close();
 
-  cerr << "ejecutando" << endl;
-
   Ruta r = menu(a, p);
 
-  // cout << endl << "Ruta elejida: " << r << endl;
-  // paisesRuta sera la lista de paises que conforman la ruta
   Paises paisesRuta;
   r.mostrarRuta(p, paisesRuta);
 
@@ -62,12 +58,10 @@ int main(int argc, char *argv[]) {
 
   Imagen mapa, avion;
   string directorioBanderas = argv[3];
-
   mapa.LeerImagen(argv[2]);
   avion.LeerImagen(argv[5], argv[6]);
-  /* avion = avion.Subsample(2); */
+  /* avion = avion.Subsample(2); // no funciona bien con las transparencias */
 
-  cerr << "Pintando banderas y aviones" << endl;
   pintaBanderasAviones(paisesRuta, avion, directorioBanderas, mapa);
 
   mapa.EscribirImagen("pruebas/mapa_banderas.ppm");
@@ -94,32 +88,36 @@ void pintaBanderasAviones(const Paises &paisesRuta, const Imagen &avion,
   double angulo = 0;
   Imagen bandera, avionRotado = avion;
 
-  cerr << "Antes del bucle" << endl;
   for (auto it = paisesRuta.cbegin(); it != paisesRuta.cend(); ++it) {
     string direccionBandera = directorioBanderas;
     direccionBandera += "/";
     direccionBandera += it->GetBandera();
     bandera.LeerImagen(direccionBandera.c_str());
 
-    cerr << "// Posicion del pais: " << it->GetPais() << endl;
+    /* cerr << "// Posicion del pais: " << it->GetPais() << endl; */
     posi = (mapa.num_filas() / 180.0) * (90 - it->GetPunto().getLatitud());
     posj = (mapa.num_cols() / 360.0) * (180 + it->GetPunto().getLongitud());
 
-    cerr << "// Posicion de la bandera centrada en el pais: " << endl;
+    /* cerr << "// Posicion de la bandera centrada en el pais: " << endl; */
     int posi_b = posi - bandera.num_filas() / 2;
     int posj_b = posj - bandera.num_cols() / 2;
 
-    cerr << "// Ángulo del avión " << endl;
+    /* cerr << "// Ángulo del avión " << endl; */
     auto it2 = it;
     ++it2;
     if (it != paisesRuta.cend() && it2 != paisesRuta.cend()) {
-      int x = abs(it->GetPunto().getLongitud() - it2->GetPunto().getLongitud());
-      int y = abs(it->GetPunto().getLatitud() - it2->GetPunto().getLatitud());
+      int posi_next =
+          (mapa.num_filas() / 180.0) * (90 - it2->GetPunto().getLatitud());
+      int posj_next =
+          (mapa.num_cols() / 360.0) * (180 + it2->GetPunto().getLongitud());
+      int x = abs(posi - posi_next);
+      int y = abs(posj - posj_next);
       angulo = atan2(x, y) * (180 / M_PI);
+      cerr << "ángulo: " << angulo << endl;
       avionRotado = avion.Rota(angulo);
     }
 
-    cerr << "// Posicion del avion" << endl;
+    /* cerr << "// Posicion del avion" << endl; */
     int posi_a = posi - avionRotado.num_filas() / 2;
     int posj_a = posj - avionRotado.num_cols() / 2;
 

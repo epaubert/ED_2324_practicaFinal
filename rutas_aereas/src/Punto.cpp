@@ -1,5 +1,6 @@
 #include "../include/Punto.h"
 #include <assert.h>
+#include <cmath>
 
 Punto::Punto() {}
 Punto::Punto(float _lat, float _lng, string s) {
