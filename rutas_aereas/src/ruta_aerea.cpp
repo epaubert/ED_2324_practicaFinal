@@ -61,39 +61,42 @@ int main(int argc, char *argv[]) {
   mapa.LeerImagen(argv[2]);
   avion.LeerImagen(argv[5], argv[6]);
 
+  /* avion = avion.Subsample(3); */
+
   int posi, posj;
+  double angulo = 0;
 
   for (auto it = paisesRuta.cbegin(); it != paisesRuta.cend(); ++it) {
-
     string direccion_bandera = argv[3];
     direccion_bandera += "/";
     direccion_bandera += it->GetBandera();
 
+    // Posicion del pais: " << it->GetPais() << endl;
     posi = (mapa.num_filas() / 180.0) * (90 - it->GetPunto().getLatitud());
     posj = (mapa.num_cols() / 360.0) * (180 + it->GetPunto().getLongitud());
 
+    // Posicion de la bandera centrada en el pais: " << endl;
+    int posi_b = posi - bandera.num_filas() / 2;
+    int posj_b = posj - bandera.num_cols() / 2;
+
     bandera.LeerImagen(direccion_bandera.c_str());
 
-    mapa.PutImagen(posi, posj, bandera);
-  }
-
-  double angulo, x, y;
-
-  for (auto it = r.cbegin(); it != r.cend(); ++it) {
-
-    if (it != r.cend()) {
-      auto it2 = it;
-      ++it2;
-      x = abs(it2->getLatitud() - it->getLatitud());
-      y = abs(it2->getLongitud() - it->getLongitud());
+    // Ángulo del avión " << endl;
+    auto it2 = it;
+    ++it2;
+    if (it2 != paisesRuta.cend()) {
+      int x = abs(it2->GetPunto().getLatitud() - it->GetPunto().getLatitud());
+      int y = abs(it2->GetPunto().getLongitud() - it->GetPunto().getLongitud());
       angulo = atan(y - x) * (180 / M_PI);
     }
-
     Imagen avionRotado = avion.Rota(angulo);
-    posi = (mapa.num_filas() / 180.0) * (90 - it->getLatitud());
-    posj = (mapa.num_cols() / 360.0) * (180 + it->getLongitud());
 
-    mapa.PutImagen(posi, posj, avionRotado, tp);
+    // Posicion del avion" << endl;
+    int posi_a = posi - avionRotado.num_filas() / 2;
+    int posj_a = posj - avionRotado.num_cols() / 2;
+
+    mapa.PutImagen(posi_b, posj_b, bandera);
+    mapa.PutImagen(posi_a, posj_a, avionRotado, tp);
   }
 
   mapa.EscribirImagen("pruebas/mapa_banderas.ppm");

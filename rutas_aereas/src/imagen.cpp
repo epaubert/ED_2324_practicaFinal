@@ -220,10 +220,12 @@ Imagen Imagen::Rota(double angulo) const {
       old_col = ceil((double)old_col);
       if ((old_row >= 0) && (old_row < num_filas()) && (old_col >= 0) &&
           (old_col < num_cols())) {
-        Iout(rows, cols) = operator()(old_row, old_col);
+        Iout(rows, cols) = (*this)(old_row, old_col);
 
-      } else
+      } else {
         Iout(rows, cols).r = Iout(rows, cols).g = Iout(rows, cols).b = 255;
+        Iout(rows, cols).transp = 0;
+      }
     }
   }
   return Iout;

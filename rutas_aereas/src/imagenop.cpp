@@ -61,7 +61,7 @@ Imagen Imagen::Zoom2X() const {
 
 Pixel Imagen::Mean(int i, int j, int height, int width) const {
   Pixel out;
-  int auxR, auxG, auxB;
+  int auxR, auxG, auxB, auxT;
   auxR = auxR = auxB = 0;
 
   for (int k = 0; k < height; k++) {
@@ -69,12 +69,14 @@ Pixel Imagen::Mean(int i, int j, int height, int width) const {
       auxR += (data[i + k][j + l].r);
       auxG += (data[i + k][j + l].g);
       auxB += (data[i + k][j + l].r);
+      auxT += (data[i + k][j + l].transp);
     }
   }
 
   out.r = auxR / (height * width);
   out.g = auxG / (height * width);
   out.b = auxB / (height * width);
+  out.transp = auxT / (height * width) < 200 ? 0 : 255;
 
   return out;
 }

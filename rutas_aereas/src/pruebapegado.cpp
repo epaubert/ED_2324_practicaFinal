@@ -6,7 +6,7 @@
 using namespace std;
 
 int main(int argc, char *argv[]) {
-  if (argc != 8) {
+  if (argc != 9) {
     cout << "Los parametros son :" << endl;
     cout << "1.-La imagen de fondo" << endl;
     cout << "2.-La imagen a pegar" << endl;
@@ -15,6 +15,7 @@ int main(int argc, char *argv[]) {
     cout << "5.-La fila donde pegar" << endl;
     cout << "6.-La columna donde pegar" << endl;
     cout << "7.- 0: Pegado Opaco 1: Pegado Blending" << endl;
+    cout << "8.- Ángulo de rotación " << endl;
     return 0;
   }
   Imagen I, Ip;
@@ -23,6 +24,7 @@ int main(int argc, char *argv[]) {
   int i, j;
   i = atoi(argv[5]);
   j = atoi(argv[6]);
+  int a = atoi(argv[8]);
 
   Tipo_Pegado tp = OPACO; // variable de tipo Tipo_Pegado que es un enumerado
                           // con los valores OPACO y 	BLENDING
@@ -30,6 +32,7 @@ int main(int argc, char *argv[]) {
   if (au != 0)
     tp = BLENDING;
 
-  I.PutImagen(i, j, Ip, tp);
+  Imagen Iout = Ip.Rota(a);
+  I.PutImagen(i, j, Iout, tp);
   I.EscribirImagen(argv[4]);
 }
