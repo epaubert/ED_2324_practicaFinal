@@ -1,14 +1,19 @@
 #include "../include/Almacen_Rutas.h"
 #include "../include/Paises.h"
 #include "../include/imagen.h"
+#include <cmath>
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <list>
-#include <math.h>
 using namespace std;
 
+const Tipo_Pegado tp = BLENDING;
+
 Ruta menu(const Almacen_Rutas &A, const Paises &p);
+
+void pintaBanderasAviones(const Paises &paisesRuta, const Imagen &avion,
+                          const string &directorioBanderas, Imagen &mapa);
 
 int main(int argc, char *argv[]) {
   if (argc != 7) {
@@ -55,49 +60,15 @@ int main(int argc, char *argv[]) {
 
   /////////////////////NUEVO/////////////////////////////////////
 
-  Imagen mapa, bandera, avion;
-  Tipo_Pegado tp = BLENDING;
+  Imagen mapa, avion;
+  string directorioBanderas = argv[3];
 
   mapa.LeerImagen(argv[2]);
   avion.LeerImagen(argv[5], argv[6]);
+  /* avion = avion.Subsample(2); */
 
-  /* avion = avion.Subsample(3); */
-
-  int posi, posj;
-  double angulo = 0;
-
-  for (auto it = paisesRuta.cbegin(); it != paisesRuta.cend(); ++it) {
-    string direccion_bandera = argv[3];
-    direccion_bandera += "/";
-    direccion_bandera += it->GetBandera();
-
-    // Posicion del pais: " << it->GetPais() << endl;
-    posi = (mapa.num_filas() / 180.0) * (90 - it->GetPunto().getLatitud());
-    posj = (mapa.num_cols() / 360.0) * (180 + it->GetPunto().getLongitud());
-
-    // Posicion de la bandera centrada en el pais: " << endl;
-    int posi_b = posi - bandera.num_filas() / 2;
-    int posj_b = posj - bandera.num_cols() / 2;
-
-    bandera.LeerImagen(direccion_bandera.c_str());
-
-    // Ángulo del avión " << endl;
-    auto it2 = it;
-    ++it2;
-    if (it2 != paisesRuta.cend()) {
-      int x = abs(it2->GetPunto().getLatitud() - it->GetPunto().getLatitud());
-      int y = abs(it2->GetPunto().getLongitud() - it->GetPunto().getLongitud());
-      angulo = atan(y - x) * (180 / M_PI);
-    }
-    Imagen avionRotado = avion.Rota(angulo);
-
-    // Posicion del avion" << endl;
-    int posi_a = posi - avionRotado.num_filas() / 2;
-    int posj_a = posj - avionRotado.num_cols() / 2;
-
-    mapa.PutImagen(posi_b, posj_b, bandera);
-    mapa.PutImagen(posi_a, posj_a, avionRotado, tp);
-  }
+  cerr << "Pintando banderas y aviones" << endl;
+  pintaBanderasAviones(paisesRuta, avion, directorioBanderas, mapa);
 
   mapa.EscribirImagen("pruebas/mapa_banderas.ppm");
 
@@ -115,4 +86,44 @@ Ruta menu(const Almacen_Rutas &A, const Paises &P) {
   } while (it == A.cend());
 
   return *it;
+}
+
+void pintaBanderasAviones(const Paises &paisesRuta, const Imagen &avion,
+                          const string &directorioBanderas, Imagen &mapa) {
+  int posi, posj;
+  double angulo = 0;
+  Imagen bandera, avionRotado = avion;
+
+  cerr << "Antes del bucle" << endl;
+  for (auto it = paisesRuta.cbegin(); it != paisesRuta.cend(); ++it) {
+    string direccionBandera = directorioBanderas;
+    direccionBandera += "/";
+    direccionBandera += it->GetBandera();
+    bandera.LeerImagen(direccionBandera.c_str());
+
+    cerr << "// Posicion del pais: " << it->GetPais() << endl;
+    posi = (mapa.num_filas() / 180.0) * (90 - it->GetPunto().getLatitud());
+    posj = (mapa.num_cols() / 360.0) * (180 + it->GetPunto().getLongitud());
+
+    cerr << "// Posicion de la bandera centrada en el pais: " << endl;
+    int posi_b = posi - bandera.num_filas() / 2;
+    int posj_b = posj - bandera.num_cols() / 2;
+
+    cerr << "// Ángulo del avión " << endl;
+    auto it2 = it;
+    ++it2;
+    if (it != paisesRuta.cend() && it2 != paisesRuta.cend()) {
+      int x = abs(it->GetPunto().getLongitud() - it2->GetPunto().getLongitud());
+      int y = abs(it->GetPunto().getLatitud() - it2->GetPunto().getLatitud());
+      angulo = atan2(x, y) * (180 / M_PI);
+      avionRotado = avion.Rota(angulo);
+    }
+
+    cerr << "// Posicion del avion" << endl;
+    int posi_a = posi - avionRotado.num_filas() / 2;
+    int posj_a = posj - avionRotado.num_cols() / 2;
+
+    mapa.PutImagen(posi_b, posj_b, bandera);
+    mapa.PutImagen(posi_a, posj_a, avionRotado, tp);
+  }
 }

@@ -4,7 +4,7 @@
 #include <iostream>
 
 void Imagen::Borrar() {
-  if (data != nullptr || (nc != 0 && nf != 0)) {
+  if ((nc != 0 && nf != 0) || data != nullptr) {
     for (int i = 0; i < nf; i++) {
       delete[] data[i];
     }
@@ -35,7 +35,11 @@ Imagen::Imagen() {
   data = nullptr;
 }
 
-Imagen::Imagen(const Imagen &I) { Copiar(I); }
+Imagen::Imagen(const Imagen &I) {
+  data = nullptr;
+  nf = nc = 0;
+  Copiar(I);
+}
 
 Imagen::~Imagen() { Borrar(); }
 

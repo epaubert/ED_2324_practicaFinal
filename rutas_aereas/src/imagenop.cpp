@@ -76,7 +76,7 @@ Pixel Imagen::Mean(int i, int j, int height, int width) const {
   out.r = auxR / (height * width);
   out.g = auxG / (height * width);
   out.b = auxB / (height * width);
-  out.transp = auxT / (height * width) < 200 ? 0 : 255;
+  out.transp = auxT / (height * width); //< 200 ? 0 : 255;
 
   return out;
 }
