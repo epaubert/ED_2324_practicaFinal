@@ -12,6 +12,10 @@ const Tipo_Pegado tp = BLENDING;
 
 Ruta menu(const Almacen_Rutas &A, const Paises &p);
 
+pair<double, double> coordenadas(const Punto &p, const Imagen &mapa);
+
+double calculaAngulo(const Punto &p1, const Punto p2, const Imagen &mapa);
+
 void pintaBanderasAviones(const Paises &paisesRuta, const Imagen &avion,
                           const string &directorioBanderas, Imagen &mapa);
 
@@ -59,6 +63,8 @@ int main(int argc, char *argv[]) {
   Imagen mapa, avion;
   string directorioBanderas = argv[3];
   mapa.LeerImagen(argv[2]);
+  cerr << "Tamaño del mapa: " << mapa.num_filas() << " x " << mapa.num_cols()
+       << endl;
   avion.LeerImagen(argv[5], argv[6]);
   /* avion = avion.Subsample(2); // no funciona bien con las transparencias */
 
@@ -84,44 +90,61 @@ Ruta menu(const Almacen_Rutas &A, const Paises &P) {
 
 void pintaBanderasAviones(const Paises &paisesRuta, const Imagen &avion,
                           const string &directorioBanderas, Imagen &mapa) {
-  int posi, posj;
   double angulo = 0;
   Imagen bandera, avionRotado = avion;
+  pair<double, double> pos, pos_a, pos_b;
 
   for (auto it = paisesRuta.cbegin(); it != paisesRuta.cend(); ++it) {
     string direccionBandera = directorioBanderas;
     direccionBandera += "/";
     direccionBandera += it->GetBandera();
     bandera.LeerImagen(direccionBandera.c_str());
-
-    /* cerr << "// Posicion del pais: " << it->GetPais() << endl; */
-    posi = (mapa.num_filas() / 180.0) * (90 - it->GetPunto().getLatitud());
-    posj = (mapa.num_cols() / 360.0) * (180 + it->GetPunto().getLongitud());
-
-    /* cerr << "// Posicion de la bandera centrada en el pais: " << endl; */
-    int posi_b = posi - bandera.num_filas() / 2;
-    int posj_b = posj - bandera.num_cols() / 2;
+    pos = coordenadas(it->GetPunto(), mapa);
 
     /* cerr << "// Ángulo del avión " << endl; */
     auto it2 = it;
     ++it2;
     if (it != paisesRuta.cend() && it2 != paisesRuta.cend()) {
-      int posi_next =
-          (mapa.num_filas() / 180.0) * (90 - it2->GetPunto().getLatitud());
-      int posj_next =
-          (mapa.num_cols() / 360.0) * (180 + it2->GetPunto().getLongitud());
-      int x = abs(posi - posi_next);
-      int y = abs(posj - posj_next);
-      angulo = atan2(x, y) * (180 / M_PI);
-      cerr << "ángulo: " << angulo << endl;
+      angulo = calculaAngulo(it->GetPunto(), it2->GetPunto(), mapa);
+      // TODO aqui tendríamos que calcular donde va el avión intermedio y tal
+      // vez dibujarlo?
       avionRotado = avion.Rota(angulo);
     }
 
-    /* cerr << "// Posicion del avion" << endl; */
-    int posi_a = posi - avionRotado.num_filas() / 2;
-    int posj_a = posj - avionRotado.num_cols() / 2;
+    /* cerr << "// Pais: " << it->GetPais() << endl; */
+    /* cerr << "// Posicion de la bandera centrada en el pais: " << endl; */
+    pos_b.first = pos.first - bandera.num_filas() / 2.0;
+    pos_b.second = pos.second - bandera.num_cols() / 2.0;
+    /* cerr << "// Posicion del avion centrado" << endl; */
+    pos_a.first = pos.first - avion.num_filas() / 2.0;
+    pos_a.second = pos.second - avion.num_cols() / 2.0;
 
-    mapa.PutImagen(posi_b, posj_b, bandera);
-    mapa.PutImagen(posi_a, posj_a, avionRotado, tp);
+    mapa.PutImagen(pos_b.first, pos_b.second, bandera);
+    mapa.PutImagen(pos_a.first, pos_a.second, avionRotado, tp);
   }
+}
+
+pair<double, double> coordenadas(const Punto &p, const Imagen &mapa) {
+  pair<double, double> out;
+  out.first = (mapa.num_filas() / 180.0) * (90.0 - p.getLatitud());
+  out.second = (mapa.num_cols() / 360.0) * (180.0 + p.getLongitud());
+  /* cerr << "Coordenadas: (" << out.first << "), (" << out.second << ")" <<
+   * endl; */
+  return out;
+}
+
+double calculaAngulo(const Punto &p1, const Punto p2, const Imagen &mapa) {
+  double dx, dy, out;
+  pair<double, double> pos1, pos2;
+  pos1 = coordenadas(p1, mapa);
+  pos2 = coordenadas(p2, mapa);
+  dx = pos2.first - pos1.first;
+  dy = pos2.second - pos1.second;
+
+  /* out = atan(dx / dy); */
+  out = atan2(dx, dy);
+  cerr << "dx: " << dx << "\tdy: " << dy << "\tÁngulo: " << out * 180 / M_PI
+       << "º \tRads: " << out << endl;
+
+  return out;
 }

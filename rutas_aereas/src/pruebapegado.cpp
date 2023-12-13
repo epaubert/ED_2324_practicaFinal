@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
   int i, j;
   i = atoi(argv[5]);
   j = atoi(argv[6]);
-  int a = atoi(argv[8]);
+  double a = atoi(argv[8]) * M_PI / 180;
 
   Tipo_Pegado tp = OPACO; // variable de tipo Tipo_Pegado que es un enumerado
                           // con los valores OPACO y 	BLENDING
@@ -33,6 +33,7 @@ int main(int argc, char *argv[]) {
     tp = BLENDING;
 
   Imagen Iout = Ip.Rota(a);
+  cerr << "ángulo: " << a << endl;
   I.PutImagen(i, j, Iout, tp);
   I.EscribirImagen(argv[4]);
 }
