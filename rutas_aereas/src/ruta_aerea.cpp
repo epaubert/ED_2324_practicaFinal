@@ -8,7 +8,7 @@
 #include <list>
 using namespace std;
 
-const Tipo_Pegado tp = BLENDING;
+const Tipo_Pegado tp = OPACO;
 
 Ruta menu(const Almacen_Rutas &A, const Paises &p);
 
@@ -16,8 +16,9 @@ pair<double, double> coordenadas(const Punto &p, const Imagen &mapa);
 
 double calculaAngulo(const Punto &p1, const Punto p2, const Imagen &mapa);
 
-void pintaBanderasAviones(const Paises &paisesRuta, const Imagen &avion,
-                          const string &directorioBanderas, Imagen &mapa);
+void pintaBanderasAviones(const Ruta &ruta, const Paises &paises,
+                          const Imagen &avion, const string &directorioBanderas,
+                          Imagen &mapa);
 
 int main(int argc, char *argv[]) {
   if (argc != 7) {
@@ -68,7 +69,7 @@ int main(int argc, char *argv[]) {
   avion.LeerImagen(argv[5], argv[6]);
   /* avion = avion.Subsample(2); // no funciona bien con las transparencias */
 
-  pintaBanderasAviones(paisesRuta, avion, directorioBanderas, mapa);
+  pintaBanderasAviones(r, paisesRuta, avion, directorioBanderas, mapa);
 
   mapa.EscribirImagen("pruebas/mapa_banderas.ppm");
 
@@ -88,24 +89,32 @@ Ruta menu(const Almacen_Rutas &A, const Paises &P) {
   return *it;
 }
 
-void pintaBanderasAviones(const Paises &paisesRuta, const Imagen &avion,
-                          const string &directorioBanderas, Imagen &mapa) {
-  double angulo = 0;
+void pintaBanderasAviones(const Ruta &ruta, const Paises &paises,
+                          const Imagen &avion, const string &directorioBanderas,
+                          Imagen &mapa) {
+  double angulo = -90;
   Imagen bandera, avionRotado = avion;
   pair<double, double> pos, pos_a, pos_b;
 
-  for (auto it = paisesRuta.cbegin(); it != paisesRuta.cend(); ++it) {
+  for (auto it = ruta.cbegin(); it != ruta.cend(); ++it) {
+    auto pais = paises.find(*it);
+    if (pais == paises.end()) {
+      cerr << "ERROR: Pais no encontrado." << endl;
+      exit(EXIT_FAILURE);
+    }
     string direccionBandera = directorioBanderas;
     direccionBandera += "/";
-    direccionBandera += it->GetBandera();
+    direccionBandera += pais->GetBandera();
     bandera.LeerImagen(direccionBandera.c_str());
-    pos = coordenadas(it->GetPunto(), mapa);
+    pos = coordenadas(pais->GetPunto(), mapa);
 
     /* cerr << "// Ángulo del avión " << endl; */
     auto it2 = it;
     ++it2;
-    if (it != paisesRuta.cend() && it2 != paisesRuta.cend()) {
-      angulo = calculaAngulo(it->GetPunto(), it2->GetPunto(), mapa);
+    if (it != ruta.cend() && it2 != ruta.cend()) {
+      auto pais_sig = paises.find(*it2);
+      cerr << pais->GetPais() << " -> " << pais_sig->GetPais() << endl;
+      angulo = calculaAngulo(pais->GetPunto(), pais_sig->GetPunto(), mapa);
       // TODO aqui tendríamos que calcular donde va el avión intermedio y tal
       // vez dibujarlo?
       avionRotado = avion.Rota(angulo);

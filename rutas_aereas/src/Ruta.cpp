@@ -23,7 +23,7 @@ void Ruta::mostrarRuta(const Paises &P, Paises &paisesRuta) {
     auto pais = P.find(*it);
     if (it != cbegin())
       cout << " -> ";
-    cout << (*pais).GetPais();
+    cout << pais->GetPais();
     paisesRuta.Insertar(*pais);
   }
   cout << endl << endl << "Generando mapa..." << endl;
