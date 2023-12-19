@@ -12,7 +12,7 @@ void Ruta::Borrar(const Punto &n) { puntos.remove(n); }
 string Ruta::getCode() const { return code; }
 void Ruta::setCode(const string &_code) { code = _code; }
 
-void Ruta::mostrarRuta(const Paises &P, Paises &paisesRuta) {
+void Ruta::mostrarRuta(const Paises &P, Paises &paisesRuta) const {
   const_iterator it;
 
   cout << endl << "Ruta elegida: " << code << endl;
