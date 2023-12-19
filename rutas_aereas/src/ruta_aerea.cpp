@@ -1,28 +1,11 @@
-#include "../include/Almacen_Rutas.h"
-#include "../include/Paises.h"
-#include "../include/imagen.h"
+#include "../include/AuxFnc.h"
+#include <cctype>
 #include <cmath>
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <list>
 using namespace std;
-
-const Tipo_Pegado tp = BLENDING;
-const string EXIT = "exit";
-
-Almacen_Rutas::const_iterator menu(const Almacen_Rutas &A, const Paises &p);
-
-pair<double, double> coordenadas(const Punto &p, const Imagen &mapa);
-
-double calculaAngulo(const Punto &p1, const Punto p2, const Imagen &mapa);
-
-void pintaBanderasAviones(const Ruta &ruta, const Paises &paises,
-                          const Imagen &avion, const string &directorioBanderas,
-                          Imagen &mapa);
-
-pair<double, double> centrarCoordenadas(const pair<double, double> &c2,
-                                        const Imagen &i);
 
 int main(int argc, char *argv[]) {
   if (argc != 7) {
@@ -86,9 +69,10 @@ Almacen_Rutas::const_iterator menu(const Almacen_Rutas &A, const Paises &P) {
   string s = "R0";
   Almacen_Rutas::const_iterator it = A.cend();
   do {
-    cout << "Elija una ruta (exit para salir): " << endl;
+    cout << "Elija una ruta(" << EXIT << " para salir): " << endl;
     A.mostrarRutas(P);
     cin >> s;
+    s[0] = toupper(s[0]);
     it = A.elijeRuta(s);
   } while (s != EXIT && it == A.cend());
 
