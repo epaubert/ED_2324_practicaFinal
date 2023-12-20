@@ -1,6 +1,6 @@
 /**
  * @file ruta_aerea.cpp
-*/
+ */
 
 #include "../include/AuxFnc.h"
 #include <cctype>
@@ -11,6 +11,9 @@
 #include <list>
 using namespace std;
 
+/**
+ * @brief función principal del programa
+ */
 int main(int argc, char *argv[]) {
   if (argc != 7) {
     cout << "Los parametros son :" << endl;

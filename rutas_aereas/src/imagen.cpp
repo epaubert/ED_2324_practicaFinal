@@ -234,5 +234,3 @@ Imagen Imagen::Rota(double angulo) const {
   }
   return Iout;
 }
-
-#include "imagenop.cpp"
