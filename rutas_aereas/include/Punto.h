@@ -20,6 +20,9 @@ using namespace std;
  * @ref DatosPunto "Getter y Setters de Punto"
  */
 
+/**
+ * @brief un punto en el globo terráqueo
+ */
 class Punto {
 private:
   double lat, lng;

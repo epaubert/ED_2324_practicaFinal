@@ -10,13 +10,15 @@
 #include "Punto.h"
 
 /**
-   * @section datos_sec Acceso a datos
-   * Para obtener más información sobre el acceso a datos, consulta el
-   * @ref DatosPais "Getter y Setters de Pais"
-   */
+ * @section datos_sec Acceso a datos
+ * Para obtener más información sobre el acceso a datos, consulta el
+ * @ref DatosPais "Getter y Setters de Pais"
+ */
 
-class Pais
-{
+/**
+ * @brief Un pais definido por su localizazción, su nombre y su bandera
+ */
+class Pais {
 private:
   Punto p;
   string pais;
@@ -115,31 +117,32 @@ public:
    */
   bool operator!=(const Punto &P) const;
 
-
   /**
    * @brief Sobrecarga del **operator>>**
-   * 
+   *
    * Sobrecarga que permite la escritura de datos dentro de sus atributos
-   * 
-   * La entrada de datos vendra desde un archivo de formato .txt, por lo que tenemos que filtrar lo que recibe P
-   * 
+   *
+   * La entrada de datos vendra desde un archivo de formato .txt, por lo que
+   * tenemos que filtrar lo que recibe P
+   *
    * @param is Flujo de entrada de datos
    * @param P Objeto Pais en el que queremos guardar los datos
-   * 
+   *
    * @return El flujo de entrada correcto
-  */
+   */
   friend istream &operator>>(istream &is, const Pais &P);
 
   /**
    * @brief Sobrecarga del **operator<<**
-   * 
+   *
    * Sobrecarga que permite la salida de datos de la clase Pais
-   * 
+   *
    * @param os Flujo de salida de datos
    * @param P Objeto Pais del que queremos ver su contenido
-   * 
-   * @return El flujo de salida con el formato que queremos y con los datos que queremos
-  */
+   *
+   * @return El flujo de salida con el formato que queremos y con los datos que
+   * queremos
+   */
   friend ostream &operator<<(ostream &os, const Pais &P);
 };
 

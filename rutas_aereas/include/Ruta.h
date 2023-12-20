@@ -22,6 +22,9 @@ using namespace std;
  * @ref DatosRuta "Getter y Setters de Ruta"
  */
 
+/**
+ * @brief Una ruta que sigue un conjunto de Puntos y se identifica con un código
+ */
 class Ruta {
 private:
   list<Punto> puntos;
