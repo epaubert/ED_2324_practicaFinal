@@ -1,4 +1,93 @@
-/**
-* @brief HOLA
-* nkasjdlkajdksajdlajsdjdsaldjlksadljaslk
+/*! \mainpage Título de la página principal
+
+@image html doxyque.png "Pie de foto"
+
+# Información sobre Doxygen
+Doxygen admite el uso de la [sintaxis de Markdown (Consulta aquí los comandos básicos)](https://www.markdownguide.org/basic-syntax).
+
+Así como el uso de  <a href="https://htmlcheatsheet.com/">sintaxis <strong>HTML</strong></a>. Esto es especialmente útil
+para aquellos aspectos que Markdown no permite modificar, como el <span  style="color:red">color</span>. Aunque es buena idea evitarlo en la medida de lo posible, por dos
+motivos:
+
+1. <span style="font-size:1.1em">Hace el código <strong>poco</strong> <span style="  background-image: linear-gradient(to left, #4285f4, #34a853, #fbbc05, #ea4335); -webkit-background-clip: text; color: transparent;"> <strong> LEGIBLE </strong> </span></span>
+2. La idea detrás de Markdown es separar _aspecto_ y _contenido_. Y es una __gran idea__.
+
+La forma más correcta de modificar el aspecto debería ser mediante un documento ``.css`` configurado en el archivo ``Doxyfile.in``.
+Si te interesa, puedes echarle un vistazo a la [documentación](https://www.doxygen.nl/manual/customize.html) o a
+temas customizados como [este](https://jothepro.github.io/doxygen-awesome-css/). Aunque el tema por defecto nos parece
+perfecto, _CLÁSICO_. Así puedes centrarte en el contenido.
+
+Por último, lo hemos visto en clase y hay suficientes ejemplos en el código fuente proporcionado, pero puedes consultar la
+mayor parte de la sintaxis de Doxygen para comentar código en su
+[documentación](https://www.doxygen.nl/manual/docblocks.html).
+
+# Introducción
+
+A RELLENAR POR EL ESTUDIANTE
+
+# Ejecutables
+
+@image html invert.png
+## Negativo:
+
+Calcula el negativo de una imagen
+
+> __negativo__ \<FichImagenOriginal\> \<FichImagenDestino\>
+@param "<FichImagenOriginal>" Imagen PGM a la que se va a calcular
+@param <FichImagenDestino> Imagen PGM resultado de calcular el negativo
+
+## Subimagen:
+> __subimagen__ \<FichImagenOriginal\> \<FichImagenDestino\> \<fila\> \<col\> \<fila_sub\> \<cols_sub\>
+@param <FichImagenOriginal> Imagen PGM original
+@param <FichImagenDestino> Imagen PGM resultado
+@param fila fila donde se empieza a recortar
+@param col columna donde se empieza a recortar
+@param fila_sub altura de la subimagen
+@param cols_sub anchura de la subimagen
+
+## Zoom:
+
+Realiza un zoom X2 a una porcion concreta de la imagen
+
+> __zoom__ \<FichImagenOriginal\> \<FichImagenDestino\> \<fila\> \<col\> \<lado\>
+@param <FichImagenOriginal> Imagen PGM original
+@param <FichImagenDestino> Imagen PGM resultado
+@param fila fila donde se empieza a substraer la imagen en la esquiza superior izquierda
+@param col columna donde se empieza a substraer la imagen en la esquiza superior izquierda
+@param lado tamaño del lado del cuadrado (el tamaño debe estar incluido totalmente dentro de la imagen)
+
+## Icono:
+
+Crea una imagen reducida a partir de una imagen original
+
+> __icono__ \<FichImagenOriginal\> \<FichImagenDestino\> \<factor\>
+@param <FichImagenOriginal> Imagen PGM original
+@param <FichImagenDestino> Imagen PGM resultado
+@param factor factor de reduccion de la imagen (se calcula en base a la formula --> floor(filas / factor) * floor(cols / factor))
+
+## Contraste:
+
+Genera una imagen con un contraste de grises mas elevado que la imagen original
+
+> __contraste__ \<FichImagenOriginal\> \<FichImagenDestino\> \<e1\> \<e2\> \<s1\> \<s2\>
+@param <FichImagenOriginal> Imagen PGM original
+@param <FichImagenDestino> Imagen PGM resultado
+@param e1 umbral inferior de la imagen de entrada
+@param e2 umbral superior de la imagen de entrada
+@param s1 umbral inferior de la imagen de salida
+@param s2 umbral superior de la imagen de salida
+
+## Barajar:
+Baraja las filas de una imagen. Tiene dos implementaciones una original poco eficiente y otra más eficiente que aprovecha la representación interna modificada. La implemetación original copia pixel a pixel las filas de la imagen original. La implemetación eficiente utiliza una variable byte ** temp para guardar el nuevo orden en el que estarán las filas. De esta forma la eficiencia teórica pasa de ser n^2 a n.  
+He ejecutado __barajar__ con varias imágenes (board.pgm, shuffle_9973.pgm, vacas.pgm, icono_board.pgm) de distintos tamaños con las dos implementaciones diez veces y he hecho la media de cada imagen. Los datos están en estudiante/datos, y he creado dos gráficas, una con todos los datos y otra solo con la implemetación eficiente, ya que los números son tan pequeños en comparación que no se ven.
+
+@image html grafica_todos.png "Gráfica con todos los datos"
+
+
+@image html grafica_eficientes.png "Gráfica con las ejecuciones eficientes"
+
+> __barajar__ \<FichImagenOriginal\> \<FichImagenDestino\> 
+@param "<FichImagenOriginal>" Imagen PGM original
+@param <FichImagenDestino> Imagen PGM barajada
+
 */
