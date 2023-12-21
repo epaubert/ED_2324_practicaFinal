@@ -23,71 +23,44 @@ mayor parte de la sintaxis de Doxygen para comentar código en su
 
 # Introducción
 
-A RELLENAR POR EL ESTUDIANTE
+En esta práctica lo que queremos es situar en un mapa geográfico una serie de Rutas aereas en las que se encuentran diferentes Paises. Estos paises tienen unas
+coordenadas y una bandera por lo que tenemos que situar con las coordenadas en el mapa el Pais y acto seguido situar su respectiva bandera.
 
-# Ejecutables
+El objetivo de la práctica es situar todos los paises de una ruta elegida entre 5 rutas y visualizar unos aviones que simulen el recorrido de la ruta.
 
-@image html invert.png
-## Negativo:
+Dichos aviones se localizaran en:
 
-Calcula el negativo de una imagen
+    1º --> Pais desde donde sale
+    2º --> Punto intermedio entre el pais de salida y el pais de destino
+    3º --> Pais de llegada
 
-> __negativo__ \<FichImagenOriginal\> \<FichImagenDestino\>
-@param "<FichImagenOriginal>" Imagen PGM a la que se va a calcular
-@param <FichImagenDestino> Imagen PGM resultado de calcular el negativo
+La imagen tendria que resultar en algo similar a esto:
 
-## Subimagen:
-> __subimagen__ \<FichImagenOriginal\> \<FichImagenDestino\> \<fila\> \<col\> \<fila_sub\> \<cols_sub\>
-@param <FichImagenOriginal> Imagen PGM original
-@param <FichImagenDestino> Imagen PGM resultado
-@param fila fila donde se empieza a recortar
-@param col columna donde se empieza a recortar
-@param fila_sub altura de la subimagen
-@param cols_sub anchura de la subimagen
+@image html ejemploPractica.png width=800px
+@brief Imagen de ejemplo
 
-## Zoom:
+# Ejecutables 
 
-Realiza un zoom X2 a una porcion concreta de la imagen
+## Programa Principal
 
-> __zoom__ \<FichImagenOriginal\> \<FichImagenDestino\> \<fila\> \<col\> \<lado\>
-@param <FichImagenOriginal> Imagen PGM original
-@param <FichImagenDestino> Imagen PGM resultado
-@param fila fila donde se empieza a substraer la imagen en la esquiza superior izquierda
-@param col columna donde se empieza a substraer la imagen en la esquiza superior izquierda
-@param lado tamaño del lado del cuadrado (el tamaño debe estar incluido totalmente dentro de la imagen)
+Ejecuta el programa principal 
 
-## Icono:
+> __bash__ pruebas/rutas_aereas.sh 
 
-Crea una imagen reducida a partir de una imagen original
+Para ver los cambios en directo sobre la imagen del mapa, tenga abierta la imagen y pongala a un lado de la pantalla.
 
-> __icono__ \<FichImagenOriginal\> \<FichImagenDestino\> \<factor\>
-@param <FichImagenOriginal> Imagen PGM original
-@param <FichImagenDestino> Imagen PGM resultado
-@param factor factor de reduccion de la imagen (se calcula en base a la formula --> floor(filas / factor) * floor(cols / factor))
+## Resto de pruebas
 
-## Contraste:
+### Pegado
 
-Genera una imagen con un contraste de grises mas elevado que la imagen original
+Ejecuta la prueba de pegado de una bandera con un avion
 
-> __contraste__ \<FichImagenOriginal\> \<FichImagenDestino\> \<e1\> \<e2\> \<s1\> \<s2\>
-@param <FichImagenOriginal> Imagen PGM original
-@param <FichImagenDestino> Imagen PGM resultado
-@param e1 umbral inferior de la imagen de entrada
-@param e2 umbral superior de la imagen de entrada
-@param s1 umbral inferior de la imagen de salida
-@param s2 umbral superior de la imagen de salida
+> __bash__ pruebas/pegado.sh
 
-## Barajar:
-Baraja las filas de una imagen. Tiene dos implementaciones una original poco eficiente y otra más eficiente que aprovecha la representación interna modificada. La implemetación original copia pixel a pixel las filas de la imagen original. La implemetación eficiente utiliza una variable byte ** temp para guardar el nuevo orden en el que estarán las filas. De esta forma la eficiencia teórica pasa de ser n^2 a n.  
-He ejecutado __barajar__ con varias imágenes (board.pgm, shuffle_9973.pgm, vacas.pgm, icono_board.pgm) de distintos tamaños con las dos implementaciones diez veces y he hecho la media de cada imagen. Los datos están en estudiante/datos, y he creado dos gráficas, una con todos los datos y otra solo con la implemetación eficiente, ya que los números son tan pequeños en comparación que no se ven.
+### Rotacion
 
-@image html grafica_todos.png "Gráfica con todos los datos"
+Ejecuta la prueba de rotacion de una imagen
 
-
-@image html grafica_eficientes.png "Gráfica con las ejecuciones eficientes"
-
-> __barajar__ \<FichImagenOriginal\> \<FichImagenDestino\> 
-@param "<FichImagenOriginal>" Imagen PGM original
-@param <FichImagenDestino> Imagen PGM barajada
+> __bash__ pruebas/rotacion.sh
 
 */
