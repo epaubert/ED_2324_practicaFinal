@@ -78,7 +78,11 @@ void pintaBanderasAviones(const Ruta &ruta, const Paises &paises,
 /**
  * @brief Metodo centrarCoordenadas
  *
- *
+ * Dadas unas coordenadas c2 en el mapa y una imagen i, devuelve unas coordenadas 
+ * tales que i una vez pegada con esas coordenadas quedaría centrada en c
+ * 
+ * @param c2 Coordenadas donde queremos centrar una imagen
+ * @param i Imagen que queremos centrar
  */
 pair<double, double> centrarCoordenadas(const pair<double, double> &c2,
                                         const Imagen &i);
