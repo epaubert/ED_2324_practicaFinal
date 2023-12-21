@@ -31,31 +31,21 @@ Ejecuta el programa principal
 
 > __ruta_aerea__ <archivo de paises> <mapa del mundo> <directorio de banderas <almacen de rutas> <imagen del avión> <máscara del avión>
 
-Hemos creado un script para lanzarlo con los argumentos adecuados:
-
-> __bash__ pruebas/rutas_aereas.sh 
-
 Para ver los cambios en directo sobre la imagen del mapa, tenga abierta la imagen y pongala a un lado de la pantalla.
 
 ## Resto de pruebas
 
-### Pegado
+### Rotacion
 
-Ejecuta la prueba de pegado de una bandera con un avion
+Rota una imagen y la guarda.
 
 > __pruebarotacion__ <imagen de entrada> <ángulo de rotacion> <imagen de salida>
 
-Hemos creado un script para lanzarlo con los argumentos adecuados:
+### Pegado
 
-> __bash__ pruebas/pegado.sh
+Pega una imagen sobre otra. Lo hemos modificado para que también prueba la rotación.
 
-### Rotacion
-
-Ejecuta la prueba de rotacion de una imagen. También prueba la rotación para ver si es correcta.
 > __pruebapegado__ <imagen de fondo> <imagen a pegar> <máscara de la imagen a pegar> <imagen de salida> <fila donde pegar> <columna donde pegar> <tipo de pegado (0:OPACO,1:BLENDING)> <ángulo de rotacion>
 
-Hemos creado un script para lanzarlo con los argumentos adecuados:
-
-> __bash__ pruebas/rotacion.sh
 
 */
